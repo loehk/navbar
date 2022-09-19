@@ -1,0 +1,20 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/reccomended",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "prefer-const": "warn",
+    "no-empty": "warn",
+    "func-names": "error"
+  }
+}

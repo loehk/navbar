@@ -1,10 +1,10 @@
 @font-face {
-  font-family: "FoundersGrotesk-Reg";
-  src: url("../public/fonts/FoundersGrotesk-Regular.otf");
+  font-family: 'FoundersGrotesk-Reg';
+  src: url('../public/fonts/FoundersGrotesk-Regular.otf');
 }
 
 :root {
-  font-family: "FoundersGrotesk-Reg", Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'FoundersGrotesk-Reg', Inter, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -12,8 +12,8 @@
   -webkit-text-size-adjust: 100%;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   font-size: 1.2em;
 }
-
