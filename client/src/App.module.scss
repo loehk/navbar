@@ -1,8 +1,8 @@
-@import "./styles/variables.scss";
+@import './styles/variables.scss';
 
 .App {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    background-color: $light-blue;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: $light-blue;
 }
