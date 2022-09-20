@@ -1,11 +1,4 @@
 .Navigation {
     display: flex;
     justify-content: space-between;
-    img {
-        width: 280px;
-        filter: brightness(-50);
-        max-width: 30%;
-        cursor: pointer;
-        object-fit: contain;
-    }
 }

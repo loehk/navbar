@@ -1,0 +1,18 @@
+@import "../../../styles/variables.scss";
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    img {
+        width: 30px;
+        margin-right: 0.2em;
+    }
+    span {
+        font-family: "FoundersGrotesk-SemiboldItalic", Inter, Avenir, Helvetica, Arial, sans-serif;
+        color: $dark-purple;
+        position: relative;
+        top: 0.2rem;
+        font-size: 1.2em;
+    }
+}

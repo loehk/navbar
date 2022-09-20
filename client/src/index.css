@@ -8,6 +8,11 @@
   src: url('../public/fonts/FoundersGrotesk-Bold.otf');
 }
 
+@font-face {
+  font-family: 'FoundersGrotesk-SemiboldItalic';
+  src: url('../public/fonts/FoundersGrotesk-SemiboldItalic.otf');
+}
+
 :root {
   font-family: 'FoundersGrotesk-Reg', Inter, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;
