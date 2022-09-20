@@ -1,5 +1,6 @@
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import styles from './Carousel.module.scss';
 
 const PhotoCarousel = () => {
   return (
@@ -14,14 +15,14 @@ const PhotoCarousel = () => {
       showThumbs={false}
       showIndicators={false}
     >
-      <div>
-        <img src="../../../../public/img/carousel/carousel-1.jpg" />
+      <div className={styles.carouselImg}>
+        <img src="../../../../public/img/carousel/carousel-3.jpeg" />
       </div>
-      <div>
-        <img src="../../../../public/img/carousel/carousel-2.jpg" />
+      <div className={styles.carouselImg}>
+        <img src="../../../../public/img/carousel/carousel-1.jpeg" />
       </div>
-      <div>
-        <img src="../../../../public/img/carousel/carousel-3.jpg" />
+      <div className={styles.carouselImg}>
+        <img src="../../../../public/img/carousel/carousel-2.jpeg" />
       </div>
     </Carousel>
   );
