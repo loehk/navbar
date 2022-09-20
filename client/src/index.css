@@ -3,6 +3,11 @@
   src: url('../public/fonts/FoundersGrotesk-Regular.otf');
 }
 
+@font-face {
+  font-family: 'FoundersGrotesk-Bold';
+  src: url('../public/fonts/FoundersGrotesk-Bold.otf');
+}
+
 :root {
   font-family: 'FoundersGrotesk-Reg', Inter, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;
