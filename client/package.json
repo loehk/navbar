@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.6",
     "@react-google-maps/api": "^2.12.2",
     "@tanstack/react-query": "^4.3.9",
@@ -18,6 +19,7 @@
     "git": "^0.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-responsive-carousel": "^3.2.23",
     "react-query": "^3.39.2",
     "react-router": "^6.4.0",
     "react-router-dom": "^6.4.0",
