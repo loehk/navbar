@@ -9,6 +9,7 @@ import dbConnection from './utils/dbConnection';
 // Routes
 import authRouter from './routes/authRoutes';
 import userRouter from './routes/userRoutes';
+import locationRouter from './routes/locationRoutes';
 
 const app = express();
 const port = 3000;
@@ -28,6 +29,7 @@ app.use(function (req, res, next) {
 // Routes
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
+app.use('/location', locationRouter)
 
 app.listen(port, () => {
   dbConnection()
