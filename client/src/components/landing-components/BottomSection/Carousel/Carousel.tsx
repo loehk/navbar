@@ -17,13 +17,13 @@ const PhotoCarousel = () => {
         showIndicators={false}
       >
         <div className={styles.carouselImg}>
-          <img src="../../../../public/img/carousel/carousel-3.jpeg" />
+          <img src="/img/carousel/carousel-3.jpeg" alt="Image of a bar" />
         </div>
         <div className={styles.carouselImg}>
-          <img src="../../../../public/img/carousel/carousel-1.jpeg" />
+          <img src="/img/carousel/carousel-1.jpeg" alt="Image of a bar" />
         </div>
         <div className={styles.carouselImg}>
-          <img src="../../../../public/img/carousel/carousel-2.jpeg" />
+          <img src="/img/carousel/carousel-2.jpeg" alt="Image of a bar" />
         </div>
       </Carousel>
     </div>
