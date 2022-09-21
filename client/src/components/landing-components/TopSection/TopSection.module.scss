@@ -1,0 +1,27 @@
+@import '../../../styles/variables.scss';
+
+.topSectionWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    text-align: center;
+    font-family: 'FoundersGrotesk-Bold', Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 3em;
+    color: $dark-purple;
+    padding: 0.5em;
+    margin: 0;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    @media only screen and (max-width: 450px) {
+      font-size: 2.4em;
+    }
+  }
+  .highlight {
+    color: $purple;
+    margin: 0;
+  }
+}
