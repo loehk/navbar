@@ -6,7 +6,7 @@ type Props = {};
 function ProfileButton({}: Props) {
   return (
     <button className={styles.profileButton}>
-      <PortraitRoundedIcon sx={{ fontSize: 50, color: '#272838'}} />
+      <PortraitRoundedIcon sx={{ fontSize: 40, color: '#272838'}} />
     </button>
   );
 }
