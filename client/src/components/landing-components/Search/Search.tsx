@@ -18,7 +18,7 @@ function Search({}: Props) {
         placeholder="Search"
       />
       <Button
-        sx={{ marginLeft: 10, textTransform: 'none', fontSize: 15, width: 250, padding: 1.6 }}
+        sx={{ marginLeft: 10, textTransform: 'none', fontSize: 15, width: "30%", padding: 1.6 }}
         size="large"
         variant="contained"
       >
