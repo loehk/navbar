@@ -1,11 +1,13 @@
 @import '../../../styles/variables.scss';
 
 .SideBar {
-  height: 300px;
+  position: relative;
+  overflow-x: hidden;
+  height: 70vh;
   width: 100vw;
   background-color: $light-blue;
   @media screen and (min-width: $locations-breakpoint-1) {
     height: 100%;
-    width: 500px;
+    width: 600px;
   }
 }

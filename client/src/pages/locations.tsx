@@ -37,7 +37,7 @@ export default function LocationsPage() {
 
   return (
     <div className={styles.LocationsPage}>
-      <SideBar nearbyBars={nearbyBars} />
+      <SideBar nearbyBars={nearbyBars} selectedBar={selectedBar} setSelectedBar={setSelectedBar} />
       <GoogleBarMap
         darkmode={darkmode}
         map={map}
