@@ -5,7 +5,7 @@ declare global {
       export interface Request {
         _id?: string;
         //TODO, add proper type
-        user?: any;
+        user?: NavBar.User;
       }
     }
   }
