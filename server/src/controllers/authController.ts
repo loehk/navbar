@@ -4,7 +4,7 @@ import userModel from '../models/userModel';
 import { Request, Response } from 'express';
 
 export const register = async (req: Request, res: Response) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, profilePictureBase64 } = req.body;
 
   try {
     const user = await userModel.findOne({ email });
@@ -15,6 +15,7 @@ export const register = async (req: Request, res: Response) => {
       const newUser = await userModel.create({
         username,
         email,
+        profilePictureBase64,
         password: hashedPassword,
       });
       if (newUser) {
@@ -37,8 +38,8 @@ export const login = async (req: Request, res: Response) => {
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
         if (process.env.JWT_SECRET) {
-          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-          res.status(200).json({ token });
+          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+          res.status(200).json({ username: user.username, email: user.email, profilePictureBase64: user.profilePictureBase64, token });
         } else {
           res.status(500).json({ message: 'Server error' });
         }
