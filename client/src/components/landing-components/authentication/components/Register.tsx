@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import axios from "axios";
-import TextField from '@mui/material/TextField'
+import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Skeleton from '@mui/material/Skeleton';
+import CircularProgress from '@mui/material/CircularProgress';
 import styles from  '../AuthButton.module.scss'
+import { teal } from '@mui/material/colors';
 
 
 interface userDataInterface {
@@ -13,8 +14,11 @@ interface userDataInterface {
     password: string;
     profilePictureBase64: string;
 }
+type Props = {
+    signedUp: (active: boolean) => void;
+ }
 
-const SignupForm = () => {
+const SignupForm = ({signedUp} :Props) => {
     const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState<userDataInterface>({
         username: "",
@@ -45,7 +49,10 @@ const SignupForm = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:3000/auth/register", userData);
+            await axios.post("http://localhost:3000/auth/register", userData)
+                .then((res) => {
+                    signedUp(true);
+                });
         } catch (err) {
             console.log(err);
         }
@@ -102,13 +109,9 @@ const SignupForm = () => {
                             </Button>
                     </Box>
                     <Box mt={2}>
-                        { loading ?
-                            <Skeleton width={104} height={71} />
-                            :
-                            <Button  type="submit" variant="contained" color="success" >
-                                Sign up
+                            <Button disabled={loading ? true : false} type="submit" variant="contained" color="success" >
+                                {loading ? <CircularProgress color="inherit" /> : "Sign up"}
                             </Button>
-                        }
                     </Box>
             </form>
         </div>
