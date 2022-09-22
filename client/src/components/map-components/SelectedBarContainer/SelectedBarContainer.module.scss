@@ -8,4 +8,32 @@
   height: 100%;
   z-index: 10;
   background-color: $light-blue;
+  overflow-y: scroll;
+
+  // firefox
+  scrollbar-color: $purple $light-blue;
+  scrollbar-width: thin;
+
+  // all other browsers
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $purple;
+  }
+
+  .mainImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .infoContainer {
+    padding-inline: 0.5rem;
+    .barName {
+      font-size: 1.25em;
+      line-height: 0.5rem;
+    }
+  }
 }

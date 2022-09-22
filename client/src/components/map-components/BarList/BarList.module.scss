@@ -39,6 +39,11 @@ $top-height-mobile: 1.5rem;
     height: calc(100% - $top-height);
   }
 
+  // firefox
+  scrollbar-color: $purple $light-blue;
+  scrollbar-width: thin;
+
+  // all other browsers
   &::-webkit-scrollbar {
     width: 8px;
   }
