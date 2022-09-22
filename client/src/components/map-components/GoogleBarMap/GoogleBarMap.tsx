@@ -70,7 +70,7 @@ const GoogleBarMap = ({
                 }}
                 onClick={() => {
                   setSelectedBar(bar);
-                  map!.setZoom(18);
+                  map!.setZoom(17);
                   map!.panTo(bar.geometry?.location!);
                 }}
               />

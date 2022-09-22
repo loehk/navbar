@@ -27,7 +27,7 @@ export default function LocationsPage() {
     console.log('fetching bars');
     new google.maps.places.PlacesService(map).nearbySearch(placesRequest, res => {
       console.log(res);
-      if (res) setNearbyBars(res.filter(bar => bar));
+      if (res) setNearbyBars(res);
     });
   }
 
