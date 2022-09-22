@@ -4,7 +4,7 @@ import { addUserToRequest, authenticateAdminActions } from '../middleware/auth';
 
 const router = express.Router();
 
-router.get('/create', authenticateAdminActions, createLocation);
+router.post('/create', authenticateAdminActions, createLocation);
 router.get('/get', addUserToRequest, getLocations);
 
 export default router;
