@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+import React, { useRef, useState } from 'react';
+import { GoogleMap, Marker, useJsApiLoader, LoadScriptProps } from '@react-google-maps/api';
 import { containerStyle, center, options } from './mapConfig';
 
 export type MarkerType = {
@@ -10,12 +10,9 @@ export type MarkerType = {
   website: string;
 };
 
-const GoogleBarMap = () => {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: import.meta.env.VITE_MAP_KEY
-  });
 
+const GoogleBarMap = () => {
+  
   const mapRef = useRef<google.maps.Map<Element> | null>(null);
 
   const onLoad = (map: google.maps.Map<Element>): void => {
@@ -26,9 +23,6 @@ const GoogleBarMap = () => {
     mapRef.current = null;
   };
 
-
-  if (!isLoaded) return <div>Map Loading ...</div>;
-
   return (
     <div>
       <GoogleMap
@@ -38,8 +32,7 @@ const GoogleBarMap = () => {
         zoom={12}
         onLoad={onLoad}
         onUnmount={onUnMount}
->
-      </GoogleMap>
+      ></GoogleMap>
     </div>
   );
 };

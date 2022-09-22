@@ -9,10 +9,6 @@ import { useState } from 'react';
 type Props = {};
 
 function Search({}: Props) {
-  const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: import.meta.env.VITE_MAP_KEY,
-    libraries: ['places'],
-  });
 
   const [searchBox, setSearchBox] = useState(null);
   const onPlacesChanged = () => console.log(searchBox.getPlaces());
@@ -20,8 +16,29 @@ function Search({}: Props) {
     setSearchBox(ref);
   };
 
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
+  
+  function success(pos) {
+    const crd = pos.coords;
+  
+    console.log('Your current position is:');
+    console.log(`Latitude : ${crd.latitude}`);
+    console.log(`Longitude: ${crd.longitude}`);
+    console.log(`More or less ${crd.accuracy} meters.`);
+  }
+  
+  function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+  
+  navigator.geolocation.getCurrentPosition(success, error, options);
+  
+
   return (
-    <LoadScript googleMapsApiKey={import.meta.env.VITE_MAP_KEY} libraries={['places']}>
       <motion.div
         initial={{ y: 100, opacity: 0.2 }}
         animate={{ y: 0, opacity: 1 }}
@@ -41,14 +58,13 @@ function Search({}: Props) {
           />
         </StandaloneSearchBox>
         <Button
-          sx={{ marginLeft: 5, textTransform: 'none', fontSize: 15, width: '45%', padding: 1.6 }}
+          sx={{ marginLeft: 5, textTransform: 'none', fontSize: 15, width: '30%', padding: 1.6 }}
           size="large"
           variant="contained"
         >
           Search
         </Button>
       </motion.div>
-    </LoadScript>
   );
 }
 
