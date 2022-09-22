@@ -1,16 +1,16 @@
 @font-face {
   font-family: 'FoundersGrotesk-Reg';
-  src: url('../public/fonts/FoundersGrotesk-Regular.otf');
+  src: url('/fonts/FoundersGrotesk-Regular.otf');
 }
 
 @font-face {
   font-family: 'FoundersGrotesk-Bold';
-  src: url('../public/fonts/FoundersGrotesk-Bold.otf');
+  src: url('/fonts/FoundersGrotesk-Bold.otf');
 }
 
 @font-face {
   font-family: 'FoundersGrotesk-SemiboldItalic';
-  src: url('../public/fonts/FoundersGrotesk-SemiboldItalic.otf');
+  src: url('/fonts/FoundersGrotesk-SemiboldItalic.otf');
 }
 
 :root {

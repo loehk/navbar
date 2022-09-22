@@ -4,7 +4,7 @@ import Home from '../src/pages/home';
 import GoogleBarMap from './components/map-components/GoogleBarMap';
 import { LoadScriptProps, useJsApiLoader } from '@react-google-maps/api';
 
-const libraries: LoadScriptProps['libraries'] = ['places'];
+const libraries: LoadScriptProps['libraries'] = ['places', 'geometry'];
 
 function App() {
   const { isLoaded } = useJsApiLoader({
@@ -13,7 +13,7 @@ function App() {
     libraries: libraries,
   });
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <div>Loading...</div>; 
 
   return (
     <div className={styles.App}>
