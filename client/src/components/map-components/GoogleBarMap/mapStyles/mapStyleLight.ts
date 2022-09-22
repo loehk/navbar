@@ -57,6 +57,15 @@ const mapStyleLight: google.maps.MapTypeStyle[] = [
     ],
   },
   {
+    featureType: 'road',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#7d6b91',
+      },
+    ],
+  },
+  {
     featureType: 'transit',
     elementType: 'all',
     stylers: [

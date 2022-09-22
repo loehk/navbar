@@ -5,7 +5,7 @@ import { CSSProperties } from 'react';
 
 export const containerStyle: CSSProperties = {
   width: '100%',
-  height: '100vh',
+  height: '100%',
 };
 
 // Center on Riga

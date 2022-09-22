@@ -1,6 +1,7 @@
-import { useRef } from 'react';
+import { SetStateAction, Dispatch } from 'react';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import { containerStyle, center, mapOptions } from './mapConfig';
+import styles from './GoogleBarMap.module.scss';
 
 export type MarkerType = {
   id: string;
@@ -10,26 +11,39 @@ export type MarkerType = {
   website: string;
 };
 
-const GoogleBarMap = ({ darkmode }: { darkmode: boolean }) => {
+const GoogleBarMap = ({
+  darkmode,
+  map,
+  setMap,
+  nearbyBars,
+  selectedBar,
+  setSelectedBar,
+}: {
+  darkmode: boolean;
+  map: google.maps.Map | null;
+  setMap: Dispatch<SetStateAction<google.maps.Map | null>>;
+  nearbyBars: google.maps.places.PlaceResult[] | null;
+  selectedBar: google.maps.places.PlaceResult | null;
+  setSelectedBar: Dispatch<SetStateAction<google.maps.places.PlaceResult | null>>;
+}) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: import.meta.env.VITE_MAP_KEY,
+    libraries: ['places'],
   });
 
-  const mapRef = useRef<google.maps.Map | null>(null);
-
   const onLoad = (map: google.maps.Map) => {
-    mapRef.current = map;
+    setMap(map);
   };
 
   const onUnMount = () => {
-    mapRef.current = null;
+    setMap(null);
   };
 
   if (!isLoaded) return <div>Map Loading ...</div>;
 
   return (
-    <div>
+    <div className={styles.googleBarMapContainer}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         options={mapOptions(darkmode)}
@@ -37,7 +51,32 @@ const GoogleBarMap = ({ darkmode }: { darkmode: boolean }) => {
         zoom={15}
         onLoad={onLoad}
         onUnmount={onUnMount}
-      ></GoogleMap>
+      >
+        {nearbyBars
+          ? nearbyBars.map(bar => (
+              <Marker
+                key={bar.place_id}
+                position={{
+                  lat: bar.geometry?.location?.lat()!,
+                  lng: bar.geometry?.location?.lng()!,
+                }}
+                icon={{
+                  url: '/icons/coctail-icon.svg',
+                  // @ts-ignore
+                  scaledSize: {
+                    height: 30,
+                    width: 30,
+                  },
+                }}
+                onClick={() => {
+                  setSelectedBar(bar);
+                  map!.setZoom(18);
+                  map!.panTo(bar.geometry?.location!);
+                }}
+              />
+            ))
+          : null}
+      </GoogleMap>
     </div>
   );
 };
