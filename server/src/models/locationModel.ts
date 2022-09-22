@@ -14,6 +14,10 @@ const locationSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    // id from google api
+    place_id: {
+      type: String,
+    },
     email: {
       type: String,
     },
