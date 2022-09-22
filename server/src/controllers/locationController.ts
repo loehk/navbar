@@ -38,7 +38,7 @@ export const createLocation = async (req: Request, res: Response) => {
   }
 };
 
-export const getLocations = async (req: Request, res: Response) => {
+export const getLocations = async (req: any, res: Response) => {
   try {
     const locations = await locationModel.find();
     if (req.user?.isAdmin) {

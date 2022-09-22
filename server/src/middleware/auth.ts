@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 
 export const SECRET_KEY: Secret = process.env.JWT_SECRET || 'secret';
 
-export const authenticateUserProfileActions = (req: Request, res: Response, next: NextFunction) => {
+export const authenticateUserProfileActions = (req: any, res: Response, next: NextFunction) => {
   const onDecode = async (error: any, decoded: { _id: any }) => {
     if (error) {
       return res.status(401).send('Invalid Token');
@@ -13,9 +13,9 @@ export const authenticateUserProfileActions = (req: Request, res: Response, next
     if (sessionUser) {
       req.user = sessionUser;
       if (
-        req.user.isAdmin ||
-        req.user._id.toString() === req.params._id ||
-        req.body._id == req.user._id.toString()
+        req.user?.isAdmin ||
+        req.user?._id.toString() === req.params._id ||
+        req.body._id == req.user?._id.toString()
       ) {
         next();
       } else {
@@ -36,7 +36,7 @@ export const authenticateUserProfileActions = (req: Request, res: Response, next
   }
 };
 
-export const authenticateLocationRights = (req: Request, res: Response, next: NextFunction) => {
+export const authenticateLocationRights = (req: any, res: Response, next: NextFunction) => {
   const onDecode = async (error: any, decoded: { _id: any }) => {
     if (error) {
       return res.status(401).send('Invalid Token');
@@ -72,7 +72,7 @@ export const authenticateLocationRights = (req: Request, res: Response, next: Ne
   }
 };
 
-export const authenticateAdminActions = (req: Request, res: Response, next: NextFunction) => {
+export const authenticateAdminActions = (req: any, res: Response, next: NextFunction) => {
   const onDecode = async (error: any, decoded: { _id: any }) => {
     if (error) {
       return res.status(401).send('Invalid Token');
@@ -99,7 +99,7 @@ export const authenticateAdminActions = (req: Request, res: Response, next: Next
   }
 };
 
-export const addUserToRequest = (req: Request, res: Response, next: NextFunction) => {
+export const addUserToRequest = (req: any, res: Response, next: NextFunction) => {
   const onDecode = async (error: any, decoded: { _id: any }) => {
     if (error) {
       return res.status(401).send('Invalid Token');
