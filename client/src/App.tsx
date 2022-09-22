@@ -3,6 +3,7 @@ import styles from './App.module.scss';
 import Home from '../src/pages/home';
 import GoogleBarMap from './components/map-components/GoogleBarMap';
 import { LoadScriptProps, useJsApiLoader } from '@react-google-maps/api';
+// import { LocationContextProvider } from './store/location-context';
 
 const libraries: LoadScriptProps['libraries'] = ['places', 'geometry'];
 
@@ -13,20 +14,22 @@ function App() {
     libraries: libraries,
   });
 
-  if (!isLoaded) return <div>Loading...</div>; 
+  if (!isLoaded) return <div>Loading...</div>;
 
   return (
-    <div className={styles.App}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} caseSensitive={false} />
-          <Route path="/home" element={<Home />} caseSensitive={false} />
-          <Route path="/locations" element={<GoogleBarMap />} caseSensitive={false} />
-          // 404 not found goes here
-          <Route path="*" caseSensitive={false} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    // <LocationContextProvider>
+      <div className={styles.App}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} caseSensitive={false} />
+            <Route path="/home" element={<Home />} caseSensitive={false} />
+            <Route path="/locations" element={<GoogleBarMap />} caseSensitive={false} />
+            // 404 not found goes here
+            <Route path="*" caseSensitive={false} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    // </LocationContextProvider>
   );
 }
 
