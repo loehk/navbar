@@ -4,7 +4,7 @@ import userModel from '../models/userModel';
 import { Request, Response } from 'express';
 
 export const register = async (req: Request, res: Response) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, profilePictureBase64 } = req.body;
 
   try {
     const user = await userModel.findOne({ email });
@@ -15,6 +15,7 @@ export const register = async (req: Request, res: Response) => {
       const newUser = await userModel.create({
         username,
         email,
+        profilePictureBase64,
         password: hashedPassword,
       });
       if (newUser) {

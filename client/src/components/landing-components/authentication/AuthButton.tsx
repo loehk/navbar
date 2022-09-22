@@ -14,10 +14,11 @@ const AuthModal = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const userContext = useContext(UserContext);
+  console.log(userContext?.user);
 
   return (
     <div>
-      {!userContext ? (
+      {userContext?.user === null ? (
       <div>
         <Button onClick={handleOpen}>Sign in</Button>
         <Modal open={open} onClose={handleClose} 

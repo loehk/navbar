@@ -9,13 +9,13 @@ import styles from './AuthButton.module.scss';
 
 const ProfileIcon = () => {
     const userContext = useContext(UserContext);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
+    const [openMenu, setOpenMenu] = useState(null);
+    const open = Boolean(openMenu);
     const handleClick = (e: any) => {
-      setAnchorEl(e.currentTarget);
+        setOpenMenu(e.currentTarget);
     };
     const handleClose = () => {
-      setAnchorEl(null);
+        setOpenMenu(null);
     };
 
     const handleLogout = async () => {
@@ -39,11 +39,11 @@ const ProfileIcon = () => {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
             >
-                <img className={styles.profileImg} src={userContext?.user?.profilePictureBase64} alt="profilePic"/> 
+                <img className={styles.profileImg} src={userContext?.user?.profilePictureBase64}/> 
             </Button>
             <Menu
                 id="basic-menu"
-                anchorEl={anchorEl}
+                anchorEl={openMenu}
                 open={open}
                 onClose={handleClose}
                 MenuListProps={{

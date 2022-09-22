@@ -3,6 +3,7 @@ import axios from "axios";
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Skeleton from '@mui/material/Skeleton';
 import styles from  '../AuthButton.module.scss'
 
 
@@ -10,27 +11,32 @@ interface userDataInterface {
     username: string;
     email: string;
     password: string;
-    profilePicture: string;
+    profilePictureBase64: string;
 }
 
 const SignupForm = () => {
+    const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState<userDataInterface>({
         username: "",
         email: "",
         password: "",
-        profilePicture: ""
+        profilePictureBase64: ""
     });
 
     const handleChange = async (e: any) => {
         const { name, value } = e.target;
 
-        if(name === "profilePicture"){
+        if(name === "profilePictureBase64"){
+            setLoading(true);
             const files = e.target.files;
             const data = new FormData();
             data.append("file", files[0]);
             data.append("upload_preset", "ml_default");
-            const res = await axios.post("https://api.cloudinary.com/v1_1/dtpmwanpq/image/upload", data);
-            setUserData({ ...userData, [name]: res.data.secure_url });
+            await axios.post("https://api.cloudinary.com/v1_1/dtpmwanpq/image/upload", data)
+            .then((res) => {
+                setUserData({ ...userData, [name]: res.data.secure_url });
+                setLoading(false);
+            });
         }else{
             setUserData({ ...userData, [name]: value });
         }
@@ -79,7 +85,7 @@ const SignupForm = () => {
                                 onChange={handleChange}
                             />
                     </Box>
-                    <Box mt={2}>
+                    <Box mt={2}  sx={{ display: 'flex' }}>
                             <Button
                             variant="contained"
                             component="label"
@@ -88,7 +94,7 @@ const SignupForm = () => {
                                 <input
                                 type="file"
                                 placeholder="Profile Picture"
-                                name="profilePicture"
+                                name="profilePictureBase64"
                                 hidden
                                 required
                                 onChange={handleChange}
@@ -96,9 +102,13 @@ const SignupForm = () => {
                             </Button>
                     </Box>
                     <Box mt={2}>
-                    <Button  type="submit" variant="contained" color="success" >
+                        { loading ?
+                            <Skeleton width={104} height={71} />
+                            :
+                            <Button  type="submit" variant="contained" color="success" >
                                 Sign up
                             </Button>
+                        }
                     </Box>
             </form>
         </div>

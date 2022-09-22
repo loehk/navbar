@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema(
     },
     profilePictureBase64: {
       type: String,
+      required: true,
     },
     locations: [
       {
