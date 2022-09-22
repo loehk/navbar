@@ -4,6 +4,8 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
 import styles from '../AuthButton.module.scss';
 import Box from '@mui/material/Box';
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
 
 interface onChangeInterface {
     target:{
@@ -18,6 +20,7 @@ interface userDataInterface {
 }
 
 const LoginForm = () => {
+    const userContext = useContext(UserContext);
     const [userData, setUserData] = useState<userDataInterface>({
         email: "",
         password: ""
@@ -34,8 +37,11 @@ const LoginForm = () => {
             await axios.post("http://localhost:3000/auth/login", userData)
                 .then((res) => {
                     localStorage.setItem("authUser", JSON.stringify(res.data));
+                    const authUser = localStorage.getItem("authUser");  
+                    if(userContext && authUser){
+                        userContext.setUser(JSON.parse(authUser));
+                    }
                 });
-                console.log(JSON.parse(localStorage.getItem("authUser") || "{}"));
         } catch (err) {
             console.log(err);
         }

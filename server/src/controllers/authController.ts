@@ -37,8 +37,8 @@ export const login = async (req: Request, res: Response) => {
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
         if (process.env.JWT_SECRET) {
-          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-          res.status(200).json({ token });
+          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+          res.status(200).json({ username: user.username, email: user.email, profilePictureBase64: user.profilePictureBase64, token });
         } else {
           res.status(500).json({ message: 'Server error' });
         }

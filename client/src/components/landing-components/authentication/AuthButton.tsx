@@ -6,15 +6,18 @@ import styles from './AuthButton.module.scss';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 import ProfileIcon from "./ProfileIcon";
+import { UserContext } from "./UserContext";
+import { useContext } from "react";
 
 const AuthModal = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const userContext = useContext(UserContext);
 
   return (
     <div>
-      {!localStorage.getItem("authUser") ? (
+      {!userContext ? (
       <div>
         <Button onClick={handleOpen}>Sign in</Button>
         <Modal open={open} onClose={handleClose} 
