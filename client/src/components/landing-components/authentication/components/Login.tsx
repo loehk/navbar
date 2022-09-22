@@ -1,5 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button';
+import styles from '../AuthButton.module.scss';
+import Box from '@mui/material/Box';
 
 interface onChangeInterface {
     target:{
@@ -39,26 +43,33 @@ const LoginForm = () => {
 
     return (
         <div>
-            <form className="register-form" onSubmit={handleSubmit}> 
-                <input
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    value={userData.email}
-                    required
-                    className="register-form__input"
-                    onChange={handleChange}
+            <form className={styles.authForm} onSubmit={handleSubmit}>
+                <Box mt={2}>
+                    <TextField
+                        id="outlined-basic"
+                        label="Email"
+                        type="email"            
+                        name="email"
+                        value={userData.email}
+                        onChange={handleChange}
                     />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={userData.password}
-                    required
-                    className="register-form__input"
-                    onChange={handleChange}
+                    </Box>
+                    <Box mt={2}>
+                    <TextField
+                        id="outlined-password-input"
+                        label="Password"
+                        type="password"
+                        autoComplete="current-password"                    
+                        name="password"
+                        value={userData.password}
+                        onChange={handleChange}
                     />
-                <button type="submit" className="register-form__button">Sign in</button>
+                    </Box>
+                    <Box mt={2}>
+                    <Button  type="submit" variant="contained" color="success">
+                        Log in
+                    </Button>
+                    </Box>
             </form>
         </div>
     )
