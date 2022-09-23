@@ -15,6 +15,31 @@ export default function BarList({ nearbyBars }: { nearbyBars: google.maps.places
             <div className={styles.barInfo}>
               <h4 className={styles.barName}>{bar.name}</h4>
               <p className={styles.barAddress}>{bar.vicinity}</p>
+              <div className={styles.bottomContainer}>
+                {bar.price_level ? (
+                  <div className={styles.dollarIconContainer}>
+                    {Array(bar.price_level)
+                      .fill('')
+                      .map((_, index) => (
+                        <span key={index}>
+                          <img
+                            className={styles.dollarIcon}
+                            src="/icons/dollar-icon.svg"
+                            alt="dollar icon"
+                          />
+                        </span>
+                      ))}
+                  </div>
+                ) : null}
+                <p
+                  className={
+                    styles.barOpenText + (bar.opening_hours?.open_now ? '' : ` ${styles.barClosed}`)
+                  }
+                >
+                  {bar.opening_hours?.open_now ? 'Open now!' : 'Closed'}
+                </p>
+                {/* <p className={styles.barDistance}></p> */}
+              </div>
             </div>
           </li>
         ))}

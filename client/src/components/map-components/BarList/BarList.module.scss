@@ -1,7 +1,7 @@
 @import '../../../styles/variables.scss';
 
 $top-height: 3rem;
-$top-height-mobile: 1.5rem;
+$top-height-mobile: 2rem;
 
 .BarListContainer {
   height: 100%;
@@ -13,13 +13,16 @@ $top-height-mobile: 1.5rem;
 
 .BarsNearby {
   height: $top-height-mobile;
-  background-color: $light-blue;
+  background-color: $purple;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   p {
+    padding-top: 10px;
     font-size: 1em;
+    line-height: 0;
+    color: $light-blue;
   }
   @media screen and (min-width: $locations-breakpoint-1) {
     height: $top-height;
@@ -68,6 +71,9 @@ $top-height-mobile: 1.5rem;
     }
     .barInfo {
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
       .barName {
         // font-weight: 700;
         width: 100%;
@@ -77,6 +83,30 @@ $top-height-mobile: 1.5rem;
       }
       .barAddress {
         font-size: 0.75em;
+        color: $gray-purple;
+      }
+      .bottomContainer {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        .dollarIconContainer {
+          margin-right: 0.5rem;
+          .dollarIcon {
+            width: 12px;
+            height: 12px;
+          }
+        }
+        .barOpenText {
+          padding-top: 2px;
+          font-size: 0.75em;
+          color: $lilac;
+        }
+        .barClosed {
+          color: #f73911;
+        }
+        .barDistance {
+          margin-left: auto;
+        }
       }
     }
   }

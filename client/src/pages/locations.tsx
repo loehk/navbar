@@ -9,6 +9,7 @@ const placesRequest: google.maps.places.PlaceSearchRequest = {
   location: center,
   radius: 500,
   type: 'bar',
+  rankBy: 0, // distance
 };
 
 export default function LocationsPage() {

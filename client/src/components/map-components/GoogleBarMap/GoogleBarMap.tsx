@@ -52,6 +52,7 @@ const GoogleBarMap = ({
         onLoad={onLoad}
         onUnmount={onUnMount}
       >
+        <Marker position={center} />
         {nearbyBars
           ? nearbyBars.map(bar => (
               <Marker
