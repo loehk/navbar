@@ -3,7 +3,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { TextField, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { GoogleMap, Autocomplete } from '@react-google-maps/api';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import { LocationContext} from "../../../store/location-context"
 import React from 'react';
 
 type Props = {};
@@ -13,10 +15,7 @@ function Search({}: Props) {
 
   const [searchBox, setSearchBox] = useState<any>(null);
 
-  const [currentLocation, setCurrentLocation] = useState({
-    latitude: 56.95,
-    longitude: 24.1,
-  });
+  const locationContext = useContext(LocationContext); 
 
   // fetches current location when the component loads
   useEffect(() => {
@@ -28,7 +27,7 @@ function Search({}: Props) {
       console.error('Failed to fetch location! Please enable location services in your browser.');
     };
     const success = (location: GeolocationPosition) => {
-      setCurrentLocation({
+      locationContext!.setCurrentLocation({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       });
@@ -50,26 +49,32 @@ function Search({}: Props) {
   };
 
   const coordinates = new google.maps.LatLng(
-    currentLocation.latitude,
-    currentLocation.longitude,
+    locationContext!.currentLocation.latitude,
+    locationContext!.currentLocation.longitude,
   ).toJSON();
+
+  const getCity = () => {
+    const placeholder = new google.maps.Geocoder()
+  }
+
 
   const swOrLatLngBounds = google.maps.geometry.spherical.computeOffset(coordinates, 500, 240);
   const ne = google.maps.geometry.spherical.computeOffset(coordinates, 500, 60);
   const mapBounds = new google.maps.LatLngBounds(swOrLatLngBounds.toJSON(), ne.toJSON());
+
   const options = {
     types: ['bar'],
   };
 
   return (
     <motion.div
-    initial={{ y: 100, opacity: 0.2 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{ duration: 0.5, delay: 0.2 }}
-    className={styles.searchContainer}
+      initial={{ y: 100, opacity: 0.2 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      className={styles.searchContainer}
     >
-        <SearchIcon sx={{ fontSize: 30, color: '#7d6b91', margin: 1 }} />
-        <GoogleMap>
+      <SearchIcon sx={{ fontSize: 30, color: '#7d6b91', margin: 1 }} />
+      <GoogleMap>
         <Autocomplete
           options={options}
           bounds={mapBounds}
@@ -88,15 +93,17 @@ function Search({}: Props) {
             placeholder="Search"
           />
         </Autocomplete>
-        </GoogleMap>
+      </GoogleMap>
+      <NavLink to="/locations">
         <Button
-          sx={{ marginLeft: 1.5, textTransform: 'none', fontSize: 15, width: '30%', padding: 1.6 }}
+          sx={{ marginLeft: 1.5, textTransform: 'none', fontSize: 15, width: '90%', padding: 1.6 }}
           size="large"
           variant="contained"
         >
           Search
         </Button>
-      </motion.div>
+      </NavLink>
+    </motion.div>
   );
 }
 

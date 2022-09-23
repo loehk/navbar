@@ -30,12 +30,17 @@ body {
   font-size: 1.2em;
 }
 
-.pac-container,
 .pac-item,
+.pac-container,
 .pac-item-query {
   background-color: $light-blue;
   font-family: 'FoundersGrotesk-Reg', Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 1rem;
+}
+
+.pac-item-query {
+  color: $dark-purple;
+  font-family: 'FoundersGrotesk-Bold';
 }
 
 .pac-item {

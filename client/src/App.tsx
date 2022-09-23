@@ -3,7 +3,8 @@ import styles from './App.module.scss';
 import Home from '../src/pages/home';
 import GoogleBarMap from './components/map-components/GoogleBarMap';
 import { LoadScriptProps, useJsApiLoader } from '@react-google-maps/api';
-// import { LocationContextProvider } from './store/location-context';
+import { LocationContextProvider} from './store/location-context';
+
 
 const libraries: LoadScriptProps['libraries'] = ['places', 'geometry'];
 
@@ -17,7 +18,7 @@ function App() {
   if (!isLoaded) return <div>Loading...</div>;
 
   return (
-    // <LocationContextProvider>
+    <LocationContextProvider>
       <div className={styles.App}>
         <BrowserRouter>
           <Routes>
