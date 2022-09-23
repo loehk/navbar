@@ -16,15 +16,15 @@ const GoogleBarMap = ({
   map,
   setMap,
   nearbyBars,
-  selectedBar,
-  setSelectedBar,
+  selectedBarId,
+  setSelectedBarId,
 }: {
   darkmode: boolean;
   map: google.maps.Map | null;
   setMap: Dispatch<SetStateAction<google.maps.Map | null>>;
   nearbyBars: google.maps.places.PlaceResult[] | null;
-  selectedBar: google.maps.places.PlaceResult | null;
-  setSelectedBar: Dispatch<SetStateAction<google.maps.places.PlaceResult | null>>;
+  selectedBarId: string | null;
+  setSelectedBarId: Dispatch<SetStateAction<string | null>>;
 }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -70,7 +70,7 @@ const GoogleBarMap = ({
                   },
                 }}
                 onClick={() => {
-                  setSelectedBar(bar);
+                  setSelectedBarId(bar.place_id || null);
                   // map!.setZoom(17);
                   map!.panTo(bar.geometry?.location!);
                 }}

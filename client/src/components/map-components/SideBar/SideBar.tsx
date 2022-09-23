@@ -5,20 +5,26 @@ import { Dispatch, SetStateAction } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 export default function ({
+  map,
   nearbyBars,
-  selectedBar,
-  setSelectedBar,
+  selectedBarId,
+  setSelectedBarId,
 }: {
+  map: google.maps.Map;
   nearbyBars: google.maps.places.PlaceResult[] | null;
-  selectedBar: google.maps.places.PlaceResult | null;
-  setSelectedBar: Dispatch<SetStateAction<google.maps.places.PlaceResult | null>>;
+  selectedBarId: string | null;
+  setSelectedBarId: Dispatch<SetStateAction<string | null>>;
 }) {
   return (
     <div className={styles.SideBar}>
       {nearbyBars ? <BarList nearbyBars={nearbyBars} /> : <p>Loading bars...</p>}
       <AnimatePresence mode="wait">
-        {selectedBar ? (
-          <SelectedBarContainer selectedBar={selectedBar} setSelectedBar={setSelectedBar} />
+        {selectedBarId ? (
+          <SelectedBarContainer
+            map={map}
+            selectedBarId={selectedBarId}
+            setSelectedBarId={setSelectedBarId}
+          />
         ) : null}
       </AnimatePresence>
     </div>

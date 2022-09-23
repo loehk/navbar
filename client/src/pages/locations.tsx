@@ -1,6 +1,6 @@
 import GoogleBarMap from '../components/map-components/GoogleBarMap/GoogleBarMap';
 import styles from './locations.module.scss';
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SideBar from '../components/map-components/SideBar/SideBar';
 import TempDarkModeButton from '../components/map-components/TempDarkModeButton';
 import { center } from '../components/map-components/GoogleBarMap/mapConfig';
@@ -19,6 +19,7 @@ export default function LocationsPage() {
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [nearbyBars, setNearbyBars] = useState<google.maps.places.PlaceResult[] | null>(null);
   const [selectedBar, setSelectedBar] = useState<google.maps.places.PlaceResult | null>(null);
+  const [selectedBarId, setSelectedBarId] = useState<string | null>(null);
 
   function toggleDarkMode() {
     setDarkmode(!darkmode);
@@ -36,16 +37,25 @@ export default function LocationsPage() {
     if (map) fetchNearbyBars(map);
   }, [map]);
 
+  if (!map) return <div>Loading...</div>;
+
   return (
     <div className={styles.LocationsPage}>
-      <SideBar nearbyBars={nearbyBars} selectedBar={selectedBar} setSelectedBar={setSelectedBar} />
+      <SideBar
+        map={map}
+        nearbyBars={nearbyBars}
+        selectedBarId={selectedBarId}
+        setSelectedBarId={setSelectedBarId}
+      />
       <GoogleBarMap
         darkmode={darkmode}
         map={map}
         setMap={setMap}
         nearbyBars={nearbyBars}
-        selectedBar={selectedBar}
-        setSelectedBar={setSelectedBar}
+        // selectedBar={selectedBar}
+        // setSelectedBar={setSelectedBar}
+        selectedBarId={selectedBarId}
+        setSelectedBarId={setSelectedBarId}
       />
       <TempDarkModeButton toggleDarkMode={toggleDarkMode} />
     </div>
