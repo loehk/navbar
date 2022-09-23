@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { GoogleMap, Marker, useJsApiLoader, LoadScriptProps } from '@react-google-maps/api';
-import { containerStyle, center, options } from './mapConfig';
+import { containerStyle, options } from './mapConfig';
+import { LocationContext } from '../../store/location-context';
 
 export type MarkerType = {
   id: string;
@@ -10,9 +11,9 @@ export type MarkerType = {
   website: string;
 };
 
-
 const GoogleBarMap = () => {
-  
+  const locationContext = useContext(LocationContext);
+
   const mapRef = useRef<google.maps.Map<Element> | null>(null);
 
   const onLoad = (map: google.maps.Map<Element>): void => {
@@ -28,7 +29,10 @@ const GoogleBarMap = () => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         options={options as google.maps.MapOptions}
-        center={center}
+        center={{
+          lat: locationContext!.currentLocation.lat,
+          lng: locationContext!.currentLocation.lng,
+        }}
         zoom={12}
         onLoad={onLoad}
         onUnmount={onUnMount}

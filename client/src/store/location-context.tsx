@@ -1,8 +1,8 @@
 import { createContext, Dispatch, SetStateAction, useState } from 'react';
 
 export type locationType = {
-  latitude: number;
-  longitude: number;
+  lat: number;
+  lng: number;
 };
 
 type LocationContextProviderProps = {
@@ -17,16 +17,16 @@ type LocationContextType = {
 export const LocationContext = createContext<LocationContextType | null>(null);
 
 export const LocationContextProvider = ({ children }: LocationContextProviderProps) => {
-  
+
   // default location is the center of Riga
   const [currentLocation, setCurrentLocation] = useState({
-    latitude: 56.95,
-    longitude: 24.1,
+    lat: 56.95,
+    lng: 24.1,
   });
 
   return (
     <LocationContext.Provider value={{ currentLocation, setCurrentLocation }}>
-      {children};
+      {children}
     </LocationContext.Provider>
   );
 };

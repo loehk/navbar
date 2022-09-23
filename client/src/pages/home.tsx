@@ -14,7 +14,7 @@ const Home = (props: Props) => {
       <Search />
       <BottomSection />
     </div>
-  );
+  )
 };
 
 export default Home;

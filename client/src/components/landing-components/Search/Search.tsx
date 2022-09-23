@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { GoogleMap, Autocomplete } from '@react-google-maps/api';
 import { useState, useRef, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { LocationContext} from "../../../store/location-context"
+import { LocationContext } from '../../../store/location-context';
 import React from 'react';
 
 type Props = {};
@@ -15,7 +15,7 @@ function Search({}: Props) {
 
   const [searchBox, setSearchBox] = useState<any>(null);
 
-  const locationContext = useContext(LocationContext); 
+  const locationContext = useContext(LocationContext);
 
   // fetches current location when the component loads
   useEffect(() => {
@@ -28,35 +28,29 @@ function Search({}: Props) {
     };
     const success = (location: GeolocationPosition) => {
       locationContext!.setCurrentLocation({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
+        lat: location.coords.latitude,
+        lng: location.coords.longitude,
       });
     };
     navigator.geolocation.getCurrentPosition(success, error, options);
     return () => {};
   }, [searchBox]);
 
-  const onPlacesChanged = () => {
-    console.log(searchBox!.getPlaces());
+  const onPlaceChanged = () => {
+    locationContext?.setCurrentLocation({
+      lat: searchBox.getPlace().geometry.location.lat(),
+      lng: searchBox.getPlace().geometry.location.lng(),
+    });
   };
 
   const onLoadHandler = (ref: any) => {
     setSearchBox(ref);
   };
 
-  const changeHandler = () => {
-    console.log(inputRef?.current?.value);
-  };
-
   const coordinates = new google.maps.LatLng(
-    locationContext!.currentLocation.latitude,
-    locationContext!.currentLocation.longitude,
+    locationContext!.currentLocation.lat,
+    locationContext!.currentLocation.lng,
   ).toJSON();
-
-  const getCity = () => {
-    const placeholder = new google.maps.Geocoder()
-  }
-
 
   const swOrLatLngBounds = google.maps.geometry.spherical.computeOffset(coordinates, 500, 240);
   const ne = google.maps.geometry.spherical.computeOffset(coordinates, 500, 60);
@@ -78,11 +72,10 @@ function Search({}: Props) {
         <Autocomplete
           options={options}
           bounds={mapBounds}
-          onPlaceChanged={onPlacesChanged}
+          onPlaceChanged={onPlaceChanged}
           onLoad={onLoadHandler}
         >
           <TextField
-            onChange={changeHandler}
             inputRef={inputRef}
             sx={{
               width: '100%',

@@ -30,8 +30,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </div>
-    // </LocationContextProvider>
-  );
+     </LocationContextProvider>
+  )
 }
-
 export default App;
