@@ -3,8 +3,8 @@ import styles from './App.module.scss';
 import Home from '../src/pages/home';
 import GoogleBarMap from './components/map-components/GoogleBarMap';
 import { LoadScriptProps, useJsApiLoader } from '@react-google-maps/api';
-import { LocationContextProvider} from './store/location-context';
-
+import { LocationContextProvider } from './store/location-context';
+import { UserContextProvider } from './components/landing-components/authentication/UserContext';
 
 const libraries: LoadScriptProps['libraries'] = ['places', 'geometry'];
 
@@ -19,18 +19,20 @@ function App() {
 
   return (
     <LocationContextProvider>
-      <div className={styles.App}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} caseSensitive={false} />
-            <Route path="/home" element={<Home />} caseSensitive={false} />
-            <Route path="/locationsgit" element={<GoogleBarMap />} caseSensitive={false} />
-            // 404 not found goes here
-            <Route path="*" caseSensitive={false} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-     </LocationContextProvider>
-  )
+      <UserContextProvider>
+        <div className={styles.App}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} caseSensitive={false} />
+              <Route path="/home" element={<Home />} caseSensitive={false} />
+              <Route path="/locationsgit" element={<GoogleBarMap />} caseSensitive={false} />
+              // 404 not found goes here
+              <Route path="*" caseSensitive={false} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </UserContextProvider>
+    </LocationContextProvider>
+  );
 }
 export default App;
