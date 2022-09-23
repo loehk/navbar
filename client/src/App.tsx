@@ -24,7 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} caseSensitive={false} />
             <Route path="/home" element={<Home />} caseSensitive={false} />
-            <Route path="/locations" element={<GoogleBarMap />} caseSensitive={false} />
+            <Route path="/locationsgit" element={<GoogleBarMap />} caseSensitive={false} />
             // 404 not found goes here
             <Route path="*" caseSensitive={false} />
           </Routes>
