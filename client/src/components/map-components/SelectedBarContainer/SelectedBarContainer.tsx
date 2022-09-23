@@ -70,10 +70,12 @@ export default function ({
         <>
           {fetchedBar.photos ? (
             <img className={styles.mainImage} src={fetchedBar.photos[0].getUrl()} alt="bar photo" />
-          ) : null}
+          ) : (
+            <div className={styles.noImage}>No Image</div>
+          )}
           <div className={styles.infoContainer}>
             <h1 className={styles.barName}>{fetchedBar.name}</h1>
-            <OpeningHours weekday_text={fetchedBar.opening_hours?.weekday_text!} />
+            <OpeningHours weekday_text={fetchedBar.opening_hours?.weekday_text} />
           </div>
         </>
       ) : (

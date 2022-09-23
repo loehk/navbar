@@ -1,13 +1,18 @@
 import styles from './OpeningHours.module.scss';
 
-export default function OpeningHours({ weekday_text }: { weekday_text: string[] }) {
+export default function OpeningHours({ weekday_text }: { weekday_text?: string[] }) {
   const dayNames: string[] = [];
   const times: string[] = [];
 
-  for (const text of weekday_text) {
-    const [day, ...time] = text.split(' ');
-    dayNames.push(day.slice(0, -1));
-    times.push(time.join(' '));
+  if (!weekday_text) {
+    dayNames.push('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+    times.push(...Array(7).fill('Closed'));
+  } else {
+    for (const text of weekday_text) {
+      const [day, ...time] = text.split(' ');
+      dayNames.push(day.slice(0, -1));
+      times.push(time.join(' '));
+    }
   }
 
   return (

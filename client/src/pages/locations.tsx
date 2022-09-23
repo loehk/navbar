@@ -37,12 +37,12 @@ export default function LocationsPage() {
     if (map) fetchNearbyBars(map);
   }, [map]);
 
-  if (!map) return <div>Loading...</div>;
+  // if (!map) return <div>Loading...</div>;
 
   return (
     <div className={styles.LocationsPage}>
       <SideBar
-        map={map}
+        map={map!}
         nearbyBars={nearbyBars}
         selectedBarId={selectedBarId}
         setSelectedBarId={setSelectedBarId}

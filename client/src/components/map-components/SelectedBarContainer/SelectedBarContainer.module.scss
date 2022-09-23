@@ -29,11 +29,21 @@
     object-fit: cover;
   }
 
+  .noImage {
+    width: 100%;
+    height: 200px;
+    background-color: $lilac;
+    color: $gray-purple;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
   .infoContainer {
     padding-inline: 0.5rem;
     .barName {
       font-size: 1.25em;
-      line-height: 0.5rem;
     }
   }
 }
