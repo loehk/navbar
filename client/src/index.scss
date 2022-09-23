@@ -1,0 +1,48 @@
+@import '../src/styles/variables.scss';
+
+@font-face {
+  font-family: 'FoundersGrotesk-Reg';
+  src: url('/fonts/FoundersGrotesk-Regular.otf');
+}
+
+@font-face {
+  font-family: 'FoundersGrotesk-Bold';
+  src: url('/fonts/FoundersGrotesk-Bold.otf');
+}
+
+@font-face {
+  font-family: 'FoundersGrotesk-SemiboldItalic';
+  src: url('/fonts/FoundersGrotesk-SemiboldItalic.otf');
+}
+
+:root {
+  font-family: 'FoundersGrotesk-Reg', Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.pac-item,
+.pac-container,
+.pac-item-query {
+  background-color: $light-blue;
+  font-family: 'FoundersGrotesk-Reg', Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+}
+
+.pac-item-query {
+  color: $dark-purple;
+  font-family: 'FoundersGrotesk-Bold';
+}
+
+.pac-item {
+  padding: 0.7rem;
+}
