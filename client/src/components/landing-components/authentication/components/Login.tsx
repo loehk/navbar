@@ -37,7 +37,6 @@ const LoginForm = () => {
             await axios.post("http://localhost:3000/auth/login", userData)
                 .then((res) => {
                     localStorage.setItem("authUser", JSON.stringify(res.data));
-                    console.log(res.data);
                     const authUser = localStorage.getItem("authUser");  
                     document.cookie = `session_token=${res.data.token}`;
                     if(userContext && authUser){

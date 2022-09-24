@@ -5,7 +5,7 @@ import { Request, Response, NextFunction } from 'express';
 export const SECRET_KEY: Secret = process.env.JWT_SECRET || 'secret';
 
 export const sessionTokenUser = async (req: any, res: Response, next: NextFunction) => {
-  const token = req.body.token;
+  const token = req.body.token || req.cookies.session_token;
   if(!token) {
       return res.status(401).send("Not authorized!");
   }
@@ -15,6 +15,31 @@ export const sessionTokenUser = async (req: any, res: Response, next: NextFuncti
       }
       req.user = user;
       next();
+  });
+};
+
+
+export const sessionTokenAdmin = async (req: any, res: Response, next: NextFunction) => {
+  const token = req.cookies.session_token;
+  if(!token) {
+      return res.status(401).send("Not authorized!");
+  }
+  jwt.verify(token, process.env.JWT_SECRET as string, (err: any, user: any) => {
+      if(err) {
+          return res.status(404).send("Token is not valid!");
+      }
+      const _id = user.id;
+      userModel.findOne({_id}, (err: any, user: any) => {
+          if(err) {
+              return res.status(404).send("User not found!");
+          }
+          if(user.isAdmin === true) {
+              req.user = user;
+              next();
+          } else {
+              return res.status(401).send("Not admin!");
+          }
+      });
   });
 };
 
@@ -52,23 +77,6 @@ export const authenticateLocationRights = (req: any, res: Response, next: NextFu
   } catch (err) {
     return res.status(401).send('Invalid Token');
   }
-};
-
-export const sessionTokenAdmin = async (req: any, res: Response, next: NextFunction) => {
-  const token = req.body.token;
-  if(!token) {
-      return res.status(401).send("Not authorized!");
-  }
-  jwt.verify(token, process.env.JWT_SECRET as string, (err: any, user: any) => {
-      if(err) {
-          return res.status(404).send("Token is not valid!");
-      }
-      req.user = user;
-      if (req.user.isAdmin) {
-        next();
-      }
-      return res.status(403).send('You are not an admin');
-  });
 };
 
 export const addUserToRequest = (req: any, res: Response, next: NextFunction) => {

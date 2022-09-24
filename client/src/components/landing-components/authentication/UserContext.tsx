@@ -27,7 +27,6 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     useEffect(() => {
         if(authUser){
             setUser(JSON.parse(authUser));
-            console.log("UserContextProvider: ", user);
         }
     }, [localStorage.getItem("authUser")]);
 

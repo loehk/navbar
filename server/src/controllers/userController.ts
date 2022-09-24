@@ -70,3 +70,23 @@ export const updateUser = async (req: Request, res: Response) => {
     console.log(err);
   }
 }
+
+export const setAdmin = async (req: Request, res: Response) => {
+  const { email, isAdmin } = req.params;
+  try {
+    const user = await userModel.findOne({ email });
+    console.log(req.params);
+    if (user) {
+      const updatedUser = await userModel.updateOne({ email }, { isAdmin });
+      if (updatedUser) {
+        res.status(200).json({ message: 'Admin status updated successfully' });
+      } else {
+        res.status(400).json({ message: 'Invalid user data' });
+      }
+    } else {
+      res.status(400).json({ message: 'Invalid user data' });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
