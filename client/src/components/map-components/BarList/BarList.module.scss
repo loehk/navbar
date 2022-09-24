@@ -1,0 +1,113 @@
+@import '../../../styles/variables.scss';
+
+$top-height: 3rem;
+$top-height-mobile: 2rem;
+
+.BarListContainer {
+  height: 100%;
+  width: 100%;
+  @media screen and (min-width: $locations-breakpoint-1) {
+    height: 100vh;
+  }
+}
+
+.BarsNearby {
+  height: $top-height-mobile;
+  background-color: $purple;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
+    padding-top: 10px;
+    font-size: 1em;
+    line-height: 0;
+    color: $light-blue;
+  }
+  @media screen and (min-width: $locations-breakpoint-1) {
+    height: $top-height;
+    p {
+      font-size: 1.25em;
+    }
+  }
+}
+
+.BarList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: scroll;
+  height: calc(100% - $top-height-mobile);
+  @media screen and (min-width: $locations-breakpoint-1) {
+    height: calc(100% - $top-height);
+  }
+
+  // firefox
+  scrollbar-color: $purple $light-blue;
+  scrollbar-width: thin;
+
+  // all other browsers
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $purple;
+  }
+
+  li {
+    margin: 4px;
+    display: flex;
+    gap: 16px;
+    .barImage {
+      width: 100px;
+      height: 100px;
+      background-color: $lilac;
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+      }
+    }
+    .barInfo {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      .barName {
+        // font-weight: 700;
+        width: 100%;
+        white-space: nowrap;
+        font-size: 1em;
+        color: $dark-purple;
+      }
+      .barAddress {
+        font-size: 0.75em;
+        color: $gray-purple;
+      }
+      .bottomContainer {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        .dollarIconContainer {
+          margin-right: 0.5rem;
+          .dollarIcon {
+            width: 12px;
+            height: 12px;
+          }
+        }
+        .barOpenText {
+          padding-top: 2px;
+          font-size: 0.75em;
+          color: $lilac;
+        }
+        .barClosed {
+          color: #f73911;
+        }
+        .barDistance {
+          margin-left: auto;
+        }
+      }
+    }
+  }
+}

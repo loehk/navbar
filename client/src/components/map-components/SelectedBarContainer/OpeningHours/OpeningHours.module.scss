@@ -1,0 +1,16 @@
+@import '../../../../styles/variables.scss';
+
+.OpeningHours {
+  display: flex;
+  font-size: 0.8em;
+  gap: 1rem;
+  .dayName {
+    color: $dark-purple;
+  }
+  .dayTime {
+    color: $lilac;
+    .closed {
+      color: #f73911;
+    }
+  }
+}

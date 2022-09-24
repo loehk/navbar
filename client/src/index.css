@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'FoundersGrotesk-Reg';
+  src: url('../public/fonts/FoundersGrotesk-Regular.otf');
+}
+
+@font-face {
+  font-family: 'FoundersGrotesk-Bold';
+  src: url('../public/fonts/FoundersGrotesk-Bold.otf');
+}
+
+@font-face {
+  font-family: 'FoundersGrotesk-SemiboldItalic';
+  src: url('../public/fonts/FoundersGrotesk-SemiboldItalic.otf');
+}
+
+:root {
+  font-family: 'FoundersGrotesk-Reg', Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-size: 1.2em;
+}
+
+ul {
+  list-style-type: none;
+}
