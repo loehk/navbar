@@ -86,7 +86,7 @@ const UsersTable = () => {
 
     return (        
         <Box sx={{minWidth: '90%'}}>
-        <TableContainer component={Paper} sx={{ minWidth: '100%',height: '60vh', maxHeight: '60vh' , overflowY: 'auto', overflowX: 'auto', '&::-webkit-scrollbar': {display: 'none'}}}>
+        <TableContainer component={Paper} sx={{ minWidth: '100%',height: '60vh', maxHeight: '60vh' , overflowY: 'auto', WebkitOverflowScrolling: 'touch',overflowX: 'auto', '&::-webkit-scrollbar': {display: 'none'}}}>
         <Table sx={{ minWidth: '100%', border: 0 }}  stickyHeader aria-label="sticky table">
             <TableHead>
             <TableRow>

@@ -13,7 +13,7 @@ export const getUsers = async (req: Request, res: Response) => {
 };
 
 export const updatePassword = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { email, password } = req.params;
   try {
     const user = await userModel.findOne({ email });
     if (user) {
@@ -75,7 +75,6 @@ export const setAdmin = async (req: Request, res: Response) => {
   const { email, isAdmin } = req.params;
   try {
     const user = await userModel.findOne({ email });
-    console.log(req.params);
     if (user) {
       const updatedUser = await userModel.updateOne({ email }, { isAdmin });
       if (updatedUser) {
