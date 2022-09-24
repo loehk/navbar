@@ -6,10 +6,10 @@ export const containerStyle = {
 };
 
 // Center on Riga
-export const center = {
-  lat: 56.95,
-  lng: 24.10
-};
+// export const center = {
+//   lat: 56.95,
+//   lng: 24.10
+// };
 
 // Disable default UI
 export const options = {
