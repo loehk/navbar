@@ -24,10 +24,18 @@
   -webkit-text-size-adjust: 100%;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body {
-  margin: 0;
   font-size: 1.2em;
+}
+
+li {
+  list-style: none;
 }
 
 .pac-item,
