@@ -38,8 +38,12 @@ export const login = async (req: Request, res: Response) => {
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
         if (process.env.JWT_SECRET) {
-          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-          res.status(200).json({ username: user.username, email: user.email, profilePictureBase64: user.profilePictureBase64, token });
+          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);   
+          return res         
+          .cookie('session_token', token, {
+            secure: false
+          })
+          .status(200).json({ username: user.username, email: user.email, profilePictureBase64: user.profilePictureBase64, isAdmin: user.isAdmin, token });
         } else {
           res.status(500).json({ message: 'Server error' });
         }
@@ -56,7 +60,7 @@ export const login = async (req: Request, res: Response) => {
 
 export const logout = async (req: Request, res: Response) => {
   try {
-    res.clearCookie('token');
+    res.clearCookie('session_token');
     res.status(200).json({ message: 'Logged out successfully' });
   } catch (err) {
     console.log(err);

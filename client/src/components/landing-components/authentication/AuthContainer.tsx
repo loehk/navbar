@@ -18,7 +18,7 @@ const AuthContainer = () => {
                             <h1 className={styles.heading}>{isLogin ? "Login" : "Signup"}</h1>
                         </div>
                         <div className={styles.forms}>
-                            {isLogin ? <LoginForm /> : <SignupForm />}
+                            {isLogin ? <LoginForm /> : <SignupForm signedUp={setIsLogin}/>}
                         </div>
                     </div>
                     <div className={styles.authChange}>

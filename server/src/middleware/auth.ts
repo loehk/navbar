@@ -4,36 +4,18 @@ import { Request, Response, NextFunction } from 'express';
 
 export const SECRET_KEY: Secret = process.env.JWT_SECRET || 'secret';
 
-export const authenticateUserProfileActions = (req: any, res: Response, next: NextFunction) => {
-  const onDecode = async (error: any, decoded: { _id: any }) => {
-    if (error) {
-      return res.status(401).send('Invalid Token');
-    }
-    const sessionUser = await userModel.findById(decoded._id);
-    if (sessionUser) {
-      req.user = sessionUser;
-      if (
-        req.user?.isAdmin ||
-        req.user?._id.toString() === req.params._id ||
-        req.body._id == req.user?._id.toString()
-      ) {
-        next();
-      } else {
-        return res.status(401).send('Please log in');
+export const sessionTokenUser = async (req: any, res: Response, next: NextFunction) => {
+  const token = req.body.token;
+  if(!token) {
+      return res.status(401).send("Not authorized!");
+  }
+  jwt.verify(token, process.env.JWT_SECRET as string, (err: any, user: any) => {
+      if(err) {
+          return res.status(404).send("Token is not valid!");
       }
-    }
-  };
-
-  const token = req.body.token || req.query.token || req.cookies['session_token'];
-
-  if (!token) {
-    return res.status(403).send('A token is required for authentication');
-  }
-  try {
-    jwt.verify(token, SECRET_KEY, (err: any, decoded: any) => onDecode(err, decoded));
-  } catch (err) {
-    return res.status(401).send('Invalid Token');
-  }
+      req.user = user;
+      next();
+  });
 };
 
 export const authenticateLocationRights = (req: any, res: Response, next: NextFunction) => {
@@ -72,31 +54,21 @@ export const authenticateLocationRights = (req: any, res: Response, next: NextFu
   }
 };
 
-export const authenticateAdminActions = (req: any, res: Response, next: NextFunction) => {
-  const onDecode = async (error: any, decoded: { _id: any }) => {
-    if (error) {
-      return res.status(401).send('Invalid Token');
-    }
-    const sessionUser = await userModel.findById(decoded._id);
-    if (sessionUser) {
-      req.user = sessionUser;
+export const sessionTokenAdmin = async (req: any, res: Response, next: NextFunction) => {
+  const token = req.body.token;
+  if(!token) {
+      return res.status(401).send("Not authorized!");
+  }
+  jwt.verify(token, process.env.JWT_SECRET as string, (err: any, user: any) => {
+      if(err) {
+          return res.status(404).send("Token is not valid!");
+      }
+      req.user = user;
       if (req.user.isAdmin) {
         next();
       }
-      return res.status(403).send('Forbidden');
-    }
-  };
-
-  const token = req.body.token || req.query.token || req.cookies['token'];
-
-  if (!token) {
-    return res.status(403).send('A token is required for authentication');
-  }
-  try {
-    jwt.verify(token, SECRET_KEY, (err: any, decoded: any) => onDecode(err, decoded));
-  } catch (err) {
-    return res.status(401).send('Invalid Token');
-  }
+      return res.status(403).send('You are not an admin');
+  });
 };
 
 export const addUserToRequest = (req: any, res: Response, next: NextFunction) => {
