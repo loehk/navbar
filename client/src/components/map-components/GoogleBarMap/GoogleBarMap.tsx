@@ -1,7 +1,8 @@
-import { SetStateAction, Dispatch } from 'react';
+import { SetStateAction, Dispatch, useContext } from 'react';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import { containerStyle, center, mapOptions } from './mapConfig';
 import styles from './GoogleBarMap.module.scss';
+import { LocationContext } from '../../../store/location-context';
 
 export type MarkerType = {
   id: string;
@@ -26,11 +27,7 @@ const GoogleBarMap = ({
   selectedBarId: string | null;
   setSelectedBarId: Dispatch<SetStateAction<string | null>>;
 }) => {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: import.meta.env.VITE_MAP_KEY,
-    libraries: ['places'],
-  });
+  const locationContext = useContext(LocationContext);
 
   const onLoad = (map: google.maps.Map) => {
     setMap(map);
@@ -39,8 +36,6 @@ const GoogleBarMap = ({
   const onUnMount = () => {
     setMap(null);
   };
-
-  if (!isLoaded) return <div>Map Loading ...</div>;
 
   return (
     <div className={styles.googleBarMapContainer}>
