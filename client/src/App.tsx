@@ -1,7 +1,6 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import styles from './App.module.scss';
 import Home from '../src/pages/home';
-import GoogleBarMap from './components/map-components/GoogleBarMap';
 import { LoadScriptProps, useJsApiLoader } from '@react-google-maps/api';
 import { LocationContextProvider } from './store/location-context';
 import { UserContextProvider } from './components/landing-components/authentication/UserContext';
