@@ -14,7 +14,6 @@ const AuthModal = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const userContext = useContext(UserContext);
-  console.log(userContext?.user);
 
   return (
     <div>

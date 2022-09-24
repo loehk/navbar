@@ -8,6 +8,8 @@ import { useContext } from 'react';
 import { UserContext } from '../../landing-components/authentication/UserContext';
 import { useState } from 'react';
 import axios from 'axios';
+import AdminSidebar from './AdminSidebar';
+import UsersTable from './UsersTable';
 
 
 
@@ -17,13 +19,10 @@ const AdminContainer = () => {
 
     return (
         <Card sx={{ width: '100%', height:  '100%', boxShadow: 'none' }}>
-          <CardContent>  
-            <Typography variant="caption" component="div">
-              Admin panel
-            </Typography>
+          <CardContent sx={{display: 'flex'}}>  
+            <AdminSidebar />
+            <UsersTable />
           </CardContent>
-          <CardActions sx={{display: 'flex', justifyContent: 'end', marginRight: 2}}>
-          </CardActions>
         </Card>
       );
 }

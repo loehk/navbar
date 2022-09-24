@@ -53,13 +53,21 @@ const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       if(password !== ''){
-        await axios.put("http://localhost:3000/user/updatePassword", {email: userContext?.user?.email, password: password});
-      } 
-      await axios.put("http://localhost:3000/user/update", userData)
-      .then((res) => {
-        localStorage.setItem('authUser', JSON.stringify(res.data));
-        userContext?.setUser(res.data);
+        await fetch(`http://localhost:3000/user/updatePassword/${userContext?.user?.email}/${password}`, {
+          'method': 'PUT',
+          'credentials': 'include',
+          'mode': 'cors',
+          'headers': {
+          'accept': 'application/json, text/plain, */*', 'content-type': 'application/json'
+          }
       });
+      } else{
+          await axios.put("http://localhost:3000/user/update", userData)
+          .then((res) => {
+            userContext?.setUser(res.data);
+            localStorage.setItem('authUser', JSON.stringify(res.data));
+          });
+      }
     } catch (error) {
       console.log(error);
     }

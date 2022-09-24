@@ -13,7 +13,7 @@ export const getUsers = async (req: Request, res: Response) => {
 };
 
 export const updatePassword = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { email, password } = req.params;
   try {
     const user = await userModel.findOne({ email });
     if (user) {
@@ -60,6 +60,25 @@ export const updateUser = async (req: Request, res: Response) => {
       const updatedUser = await userModel.updateOne({ email }, { username, profilePictureBase64 });
       if (updatedUser) {
         res.status(200).json({ username: user.username, email: user.email, profilePictureBase64: user.profilePictureBase64, isAdmin: user.isAdmin, token });
+      } else {
+        res.status(400).json({ message: 'Invalid user data' });
+      }
+    } else {
+      res.status(400).json({ message: 'Invalid user data' });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const setAdmin = async (req: Request, res: Response) => {
+  const { email, isAdmin } = req.params;
+  try {
+    const user = await userModel.findOne({ email });
+    if (user) {
+      const updatedUser = await userModel.updateOne({ email }, { isAdmin });
+      if (updatedUser) {
+        res.status(200).json({ message: 'Admin status updated successfully' });
       } else {
         res.status(400).json({ message: 'Invalid user data' });
       }
