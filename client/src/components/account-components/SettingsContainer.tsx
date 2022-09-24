@@ -23,6 +23,7 @@ const SettingsContainer = () => {
     email: userContext?.user?.email,
     username: userContext?.user?.username,
     profilePictureBase64: userContext?.user?.profilePictureBase64,
+    token: userContext?.user?.token,
   });
 
   const handleChange = async (e: any) => {

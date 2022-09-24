@@ -66,6 +66,7 @@ const SignupForm = ({signedUp} :Props) => {
                                 id="outlined-basic"
                                 label="Username"
                                 type="username"            
+                                required
                                 name="username"
                                 value={userData.username}
                                 onChange={handleChange}
@@ -77,6 +78,7 @@ const SignupForm = ({signedUp} :Props) => {
                                 label="Email"
                                 type="email"            
                                 name="email"
+                                required
                                 value={userData.email}
                                 onChange={handleChange}
                             />
@@ -88,6 +90,7 @@ const SignupForm = ({signedUp} :Props) => {
                                 type="password"
                                 autoComplete="current-password"                    
                                 name="password"
+                                required
                                 value={userData.password}
                                 onChange={handleChange}
                             />
@@ -97,13 +100,14 @@ const SignupForm = ({signedUp} :Props) => {
                             variant="contained"
                             component="label"
                             >
-                            Upload File
+                            Upload profile image
                                 <input
                                 type="file"
                                 placeholder="Profile Picture"
                                 name="profilePictureBase64"
                                 hidden
                                 required
+                                multiple accept="image/*"
                                 onChange={handleChange}
                                 />
                             </Button>

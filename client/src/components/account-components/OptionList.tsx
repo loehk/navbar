@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {Dispatch, useState} from "react";
 import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -11,7 +11,11 @@ import { UserContext } from '../landing-components/authentication/UserContext';
 import axios from "axios";
 import { useNavigate } from "react-router";
 
-const NestedList = () => {
+type Props = {
+  setOption: (active: string) => void;
+}
+
+const OptionList = (setOption: Props) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const userContext = useContext(UserContext);
@@ -33,6 +37,14 @@ const NestedList = () => {
     }
 };
 
+const handleAdminSettings = () => {
+    setOption.setOption("admin");
+}
+
+const handleUserSettings = () => {
+    setOption.setOption("user");
+}
+
   return (
     <List
       sx={{ width: '100%', maxWidth: 360, height: 'auto', bgcolor: 'background.paper' }}
@@ -45,7 +57,7 @@ const NestedList = () => {
       }
     >
     {userContext?.user?.isAdmin ?
-    <ListItemButton>
+    <ListItemButton onClick={handleAdminSettings}>
         <ListItemText primary="Admin panel" />
       </ListItemButton>
     : null}
@@ -55,7 +67,7 @@ const NestedList = () => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
+          <ListItemButton onClick={handleUserSettings} sx={{ pl: 4 }}>
             <ListItemText primary="User settings" />
           </ListItemButton>
           <ListItemButton  onClick={handleLogout} sx={{ pl: 4 }}>
@@ -67,4 +79,4 @@ const NestedList = () => {
   );
 }
 
-export default NestedList;
+export default OptionList;
