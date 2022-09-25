@@ -1,0 +1,69 @@
+@import '../../../../styles/variables.scss';
+
+.aboutWrapper {
+  margin: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+
+  @media only screen and (max-width: 650px) {
+    margin: 2em 1em;
+  }
+  h5 {
+    color: $purple;
+    font-family: 'FoundersGrotesk-Bold';
+    letter-spacing: 3px;
+    font-size: 0.9em;
+  }
+  h3 {
+    font-family: 'FoundersGrotesk-Bold';
+    font-size: 1.7em;
+    margin: 1em;
+    @media only screen and (max-width: 400px) {
+      font-size: 1.5em;
+      margin: 1em 0;
+    }
+  }
+  p {
+    width: 50%;
+    margin-bottom: 3.5em;
+    @media only screen and (max-width: 1000px) {
+      width: 90%;
+    }
+    @media only screen and (max-width: 650px) {
+      margin-bottom: 5em;
+    }
+    @media only screen and (max-width: 400px) {
+      text-align: center;
+    }
+  }
+  div {
+    background-color: rgb(195, 189, 221);
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    @media only screen and (max-width: 650px) {
+      position: relative;
+      bottom: 42px;
+    }
+    &:before {
+        content: "";
+        width: 0;
+        height: 40px;
+        display: block;
+        position: relative;
+        bottom: 42px;
+        left: 28px;
+        border: 1px solid $purple;
+
+      }
+    img {
+      position: relative;
+      width: 40px;
+      bottom: 33px;
+    }
+  }
+}

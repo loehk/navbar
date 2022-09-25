@@ -1,11 +1,12 @@
 import styles from './BottomSection.module.scss';
 import PhotoCarousel from './Carousel/Carousel';
 import { motion } from 'framer-motion';
+import About from './About/About';
+import Footer from './Footer/Footer';
 
 type Props = {};
 
 function BottomSection({}: Props) {
-
   return (
     <>
       <motion.div
@@ -16,6 +17,8 @@ function BottomSection({}: Props) {
       >
         <PhotoCarousel />
       </motion.div>
+      <About />
+      <Footer />
     </>
   );
 }

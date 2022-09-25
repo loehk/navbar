@@ -1,0 +1,47 @@
+@import '../../../../styles/variables.scss';
+
+.footerWrapper {
+  display: flex;
+  align-items: center;
+  background-image: url('./img/Footer_Bg.jpg');
+  background-position: 30% 50%;
+  background-color: $purple;
+  background-blend-mode: darken;
+  font-family: 'FoundersGrotesk-Bold';
+  width: 100%;
+  padding: 1rem;
+  position: relative;
+  z-index: 1;
+  margin-top: -5.3em;
+  color: $light-blue;
+  text-align: left;
+  .innerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 2rem;
+    width: 100%;
+    @media only screen and (max-width: 1000px) {
+     justify-content: space-between;
+    }
+    @media only screen and (max-width: 620px) {
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     gap: 1em;
+     h2 {
+      text-align: center;
+     }
+    }
+    h2 {
+      font-size: 1.5em;
+    }
+    p {
+      width: 33%;
+      font-size: 0.8em;
+      @media only screen and (max-width: 1000px) {
+        display: none;
+      }
+    }
+  }
+}

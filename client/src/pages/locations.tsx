@@ -1,19 +1,22 @@
 import GoogleBarMap from '../components/map-components/GoogleBarMap/GoogleBarMap';
 import styles from './locations.module.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import SideBar from '../components/map-components/SideBar/SideBar';
 import TempDarkModeButton from '../components/map-components/TempDarkModeButton';
-import { center } from '../components/map-components/GoogleBarMap/mapConfig';
+import { LocationContext } from '../store/location-context';
 import axios from 'axios';
 
-const placesRequest: google.maps.places.PlaceSearchRequest = {
-  location: center,
-  radius: 500,
-  type: 'bar',
-  rankBy: 0, // distance
-};
-
 export default function LocationsPage() {
+  const locationContext = useContext(LocationContext);
+
+
+  const placesRequest: google.maps.places.PlaceSearchRequest = {
+    location: locationContext!.currentLocation,
+    radius: 500,
+    type: 'bar',
+    rankBy: 0, // distance
+  };
+
   // temp state for darkmode
   const [darkmode, setDarkmode] = useState(false);
 
