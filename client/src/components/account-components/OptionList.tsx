@@ -47,7 +47,7 @@ const handleUserSettings = () => {
 
   return (
     <List
-      sx={{ width: '100%', maxWidth: 360, height: 'auto', bgcolor: 'background.paper' }}
+      sx={{ width: '100%', maxWidth: 200, height: 'auto', bgcolor: 'background.paper' }}
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
