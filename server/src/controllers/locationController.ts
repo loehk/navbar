@@ -78,9 +78,9 @@ export const updateLocationById = async (req: any, res:Response)=>{
   }
 }
 
-const removeModerators = (location: any)=>{
-  const {moderators, ...dto} = location;
-  return dto;
+const removeModerators =(location:any)=>{
+  const {moderators, ...locationData} = location;
+  return (locationData)
 }
 
 export const getLocationByPlaceId = async (req: any, res:Response)=>{
@@ -101,7 +101,8 @@ export const getLocationByPlaceId = async (req: any, res:Response)=>{
         const end = dayjs().day(today.end.day).hour(today.end.hours).minute(today.end.minutes)
         isHappyHour = dayjs().isBefore(end) && dayjs().isAfter(start)
       }
-      const {createdAt, updatedAt, __v, ...locationData} = _doc;
+      const {createdAt, updatedAt, __v, ...locationWithModerators} = _doc;
+      const locationData = removeModerators(locationWithModerators)
 
       return res.json({isHappyHour, ...locationData})
     }
@@ -110,21 +111,6 @@ export const getLocationByPlaceId = async (req: any, res:Response)=>{
     console.log(err)
   }
 }
-
-const addHappyHour =({location}:any)=>{
-
-  let isHappyHour = false;
-  const periods = location.happy_hours.periods
-  const today = periods.find((period: { start: { day: number, minutes: number, hours:number}, end: { day: number, minutes: number, hours:number}; })=>{return period.start.day === dayjs().day()})
-  if(today){
-    const start = dayjs().day(today.start.day).hour(today.start.hours).minute(today.start.minutes)
-    const end = dayjs().day(today.end.day).hour(today.end.hours).minute(today.end.minutes)
-    isHappyHour = dayjs().isBefore(end) && dayjs().isAfter(start)
-  }
-  return {isHappyHour}
-
-}
-
 
 
 export const getLocations = async (req: any, res: Response) => {
