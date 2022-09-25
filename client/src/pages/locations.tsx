@@ -21,7 +21,6 @@ export default function LocationsPage() {
   const [nearbyBars, setNearbyBars] = useState<google.maps.places.PlaceResult[] | null>(null);
   const [selectedBar, setSelectedBar] = useState<google.maps.places.PlaceResult | null>(null);
   const [selectedBarId, setSelectedBarId] = useState<string | null>(null);
-  const [navBarInfo, setNavBarInfo] = useState<any|null>(null)
 
   function toggleDarkMode() {
     setDarkmode(!darkmode);
@@ -47,16 +46,7 @@ export default function LocationsPage() {
 
   },[selectedBar])
 
-  useEffect(()=>{
-    if(map){
-      if(selectedBarId){
-        axios.get(`http://localhost:3000/location/getPlace/${selectedBarId}`).then((response)=>{
-          window.console.log(JSON.stringify(response.data))
-          setNavBarInfo(response.data)
-        })
-      }
-    }
-  },[selectedBarId])
+
 
   // if (!map) return <div>Loading...</div>;
 

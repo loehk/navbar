@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import styles from './SelectedBarContainer.module.scss';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import OpeningHours from './OpeningHours/OpeningHours';
+import axios from 'axios';
+import dayjs from 'dayjs';
 
 interface OpeningHoursDay {
   start: Date;
@@ -41,6 +43,7 @@ export default function ({
   setSelectedBarId: Dispatch<SetStateAction<string | null>>;
 }) {
   const [fetchedBar, setFetchedBar] = useState<google.maps.places.PlaceResult | null>(null);
+  const [navBarInfo, setNavBarInfo] = useState<any>();
 
   useEffect(() => {
     new google.maps.places.PlacesService(map).getDetails(
@@ -56,6 +59,104 @@ export default function ({
       },
     );
   }, [selectedBarId]);
+
+
+  useEffect(()=>{
+    if(map){
+      if(selectedBarId){
+        axios.get(`http://localhost:3000/location/getPlace/${selectedBarId}`).then((response)=>{
+          setNavBarInfo(response.data)
+        })
+      }
+    }
+  },[selectedBarId])
+
+  const getMonday=()=>{
+    if(navBarInfo){
+      const periods = navBarInfo?.happy_hours?.periods;
+      if(periods){
+        const day = periods.find((element: any)=>{return element.start.day ===1});
+        if(day){
+          return getFormattedHappyHour(day);
+        }
+      }
+    }
+    return "No happy hours"
+  }
+
+  const getTuesday=()=>{
+    if(navBarInfo){
+      const periods = navBarInfo?.happy_hours?.periods;
+      if(periods){
+        const day = periods.find((element: any)=>{return element.start.day ===2});
+        if(day){
+          return getFormattedHappyHour(day);
+        }
+      }
+    }
+    return "No happy hours"
+  }
+
+  const getWednesday=()=>{
+    if(navBarInfo){
+      const periods = navBarInfo?.happy_hours?.periods;
+      if(periods){
+        const day = periods.find((element: any)=>{return element.start.day ===3});
+        if(day){
+          return getFormattedHappyHour(day);
+        }
+      }
+    }
+    return "No happy hours"
+  }
+
+  const getThursday=()=>{
+    if(navBarInfo){
+      const periods = navBarInfo?.happy_hours?.periods;
+      if(periods){
+        const day = periods.find((element: any)=>{return element.start.day ===4});
+        if(day){
+          return getFormattedHappyHour(day);
+        }      }
+    }
+    return "No happy hours"
+  }
+
+  const getFriday=()=>{
+    if(navBarInfo){
+      const periods = navBarInfo?.happy_hours?.periods;
+      if(periods){
+        const day = periods.find((element: any)=>{return element.start.day ===5});
+        if(day){
+          return getFormattedHappyHour(day);
+        }      }
+    }
+    return "No happy hours"
+  }
+
+  const getSaturday=()=>{
+    if(navBarInfo){
+      const periods = navBarInfo?.happy_hours?.periods;
+      if(periods){
+        const day = periods.find((element: any)=>{return element.start.day ===6});
+        if(day){
+          return getFormattedHappyHour(day);
+        }      }
+    }
+    return "No happy hours"
+  }
+
+  const getSunday=()=>{
+    if(navBarInfo){
+      const periods = navBarInfo?.happy_hours?.periods;
+      if(periods){
+        const day = periods.find((element: any)=>{return element.start.day ===0});
+        if(day){
+          return getFormattedHappyHour(day);
+        }      }
+    }
+    return "No happy hours"
+  }
 
   return (
     <motion.div
@@ -77,6 +178,37 @@ export default function ({
             <h1 className={styles.barName}>{fetchedBar.name}</h1>
             <OpeningHours weekday_text={fetchedBar.opening_hours?.weekday_text} />
           </div>
+          <div className={styles.infoContainer}>
+            <h1 className={styles.barName}> Happy hours</h1>
+            <h4>{navBarInfo?.isHappyHour ? "Happy hour is on!":"It isn't happy hour :("}</h4>
+            <div className={styles.OpeningHours}>
+            <ul className={styles.dayName}>
+              <li key={"happyHour_mon"}>Monday</li>
+              <li key={"happyHour_tue"}>Tuesday</li>
+              <li key={"happyHour_wed"}>Wednesday</li>
+              <li key={"happyHour_thur"}>Thursday</li>
+              <li key={"happyHour_fri"}>Friday</li>
+              <li key={"happyHour_sat"}>Saturday</li>
+              <li key={"happyHour_sun"}>Sunday</li>
+
+            </ul>
+            <ul className={styles.dayTime}>
+            <li></li>
+              <li key={"happyHour_mon_date"}>{getMonday()}</li>
+              <li key={"happyHour_tue_date"}>{getTuesday()}</li>
+              <li key={"happyHour_wed_date"}>{getWednesday()}</li>
+              <li key={"happyHour_thur_date"}>{getThursday()}</li>
+              <li key={"happyHour_fri_date"}>{getFriday()}</li>
+              <li key={"happyHour_sat_date"}>{getSaturday()}</li>
+              <li key={"happyHour_sun_date"}>{getSunday()}</li>
+            </ul>
+            </div>
+
+            <div className={styles.OpeningHours}>
+    </div>
+
+
+          </div>
         </>
       ) : (
         'Loading..'
@@ -84,3 +216,31 @@ export default function ({
     </motion.div>
   );
 }
+function getFormattedHappyHour(day: any) {
+  let startDaytime = dayjs();
+  let endDaytime = dayjs();
+  if (day) {
+    startDaytime = startDaytime.set('second', 0);
+    endDaytime = endDaytime.set('second', 0);
+    if (day?.start?.day) {
+      startDaytime = startDaytime.set('day', day.start.day);
+    }
+    if (day?.start?.hours) {
+      startDaytime = startDaytime.set('hour', day.start.hours);
+    }
+    if (day?.start?.minutes) {
+      startDaytime = startDaytime.set('minute', day.start.minutes);
+    }
+    if (day?.end?.day) {
+      endDaytime = endDaytime.set('minute', day.end.day);
+    }
+    if (day?.end?.hours) {
+      endDaytime = endDaytime.set('hour', day.end.hours);
+    }
+    if (day?.end?.minutes) {
+      endDaytime = endDaytime.set('minute', day.end.minutes);
+    }
+  }
+  return `${startDaytime.format('hh:mm A')} - ${endDaytime.format('hh:mm A')}`;
+}
+
