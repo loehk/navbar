@@ -27,6 +27,7 @@ interface Props {
         }]};
         isHappyHour: boolean;
         phoneNumber: number;
+        moderators: string[];
         place_id: string;
         ratings: [{
             rating: number, _id: string, location: string, user: string,
@@ -51,6 +52,7 @@ const LocationModal = (location: Props) => {
   const handleClose = () => setOpen(false);    
   const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState("");
+  const [currLocation, setCurrLocation] = useState(location.location);
 
   useEffect(() => {
       getData();
@@ -74,16 +76,16 @@ const LocationModal = (location: Props) => {
       setSearch(e.target.value);
   }
 
-  const setModerator = async (id: string) => {
-        await axios.post("http://localhost:3000/location/update", { _id: location.location._id, place_id: location.location.place_id , moderators: [id] })
+  const setModerator = async (id: string, moderators: string[]) => {
+        await axios.post("http://localhost:3000/location/update", { _id: location.location._id, place_id: location.location.place_id , moderators: moderators.includes(id) ? moderators.filter(val => val !== id) : [...moderators, id] })
             .then((res) => {
-                console.log(res);
+                setCurrLocation(res.data);
+                console.log(res.data);
             })
             .catch((err) => {
                 console.log(err);
             });
     };
-
 
   return (
       <div>
@@ -119,7 +121,7 @@ const LocationModal = (location: Props) => {
                                 <TableCell>Username</TableCell>
                                 <TableCell>Email</TableCell>
                                 <TableCell align="right">Member since</TableCell>
-                                <TableCell align="right">Options</TableCell>
+                                <TableCell align="right">Moderators</TableCell>
                             </TableRow>
                             </TableHead>
                             <TableBody>
@@ -137,7 +139,12 @@ const LocationModal = (location: Props) => {
                                 <TableCell component="th" scope="row" sx={{wordBreak: 'break-all'}}>{row.email}</TableCell>
                                 <TableCell align="right" sx={{wordBreak: 'break-all'}}>{row.createdAt.replaceAll('-', '/').replace('T', '\n').split('.')[0]}</TableCell>
                                 <TableCell align="right">
-                                    <Button variant="contained" size='small' onClick={() => setModerator(row._id)}>set Moderator</Button>
+                                    <Switch
+                                        checked={currLocation.moderators.includes(row._id)}
+                                        color="secondary"
+                                        inputProps={{ 'aria-label': 'controlled' }}
+                                        onChange={() => setModerator(row._id, currLocation.moderators)}
+                                        />
                                 </TableCell>
                                 </TableRow>
                             ))}

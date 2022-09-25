@@ -134,9 +134,7 @@ export const getLocations = async (req: any, res: Response) => {
         return {isHappyHour:isHappyHour, ...location}
       
        })
-
-      const classifiedDto = dto!.map(({ moderators, createdAt, updatedAt, __v, ...locationsData }) => locationsData);
-      return res.json(classifiedDto);
+      return res.json(dto);
     }
   } catch (err) {
     console.log(err);

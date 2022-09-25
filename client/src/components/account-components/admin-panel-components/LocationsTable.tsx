@@ -21,6 +21,7 @@ interface Location {
     isHappyHour: boolean;
     phoneNumber: number;
     place_id: string;
+    moderators: [];
     ratings: [{
         rating: number, _id: string, location: string, user: string,
     }];
@@ -44,7 +45,6 @@ const LocationsTable = () => {
         })
             .then((res) => {
                 setLocations(res.data);
-                console.log(res.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -83,7 +83,7 @@ const LocationsTable = () => {
                     {row.website}
                 </TableCell>
                 <TableCell align="right">
-                    <LocationModal  location={row}/>
+                    <LocationModal location={row}/>
                 </TableCell>
                 </TableRow>
             ))}
