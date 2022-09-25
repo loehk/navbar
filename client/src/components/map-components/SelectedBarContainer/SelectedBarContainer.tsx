@@ -146,8 +146,8 @@ function getFormattedHappyHour(day: any) {
   let startDaytime = dayjs();
   let endDaytime = dayjs();
   if (day) {
-    startDaytime = startDaytime.set('second', 0);
-    endDaytime = endDaytime.set('second', 0);
+    startDaytime = startDaytime.set('second', 0).set('minute', 0);
+    endDaytime = endDaytime.set('second', 0).set('minute', 0)
     if (day?.start?.day) {
       startDaytime = startDaytime.set('day', day.start.day);
     }
@@ -158,7 +158,7 @@ function getFormattedHappyHour(day: any) {
       startDaytime = startDaytime.set('minute', day.start.minutes);
     }
     if (day?.end?.day) {
-      endDaytime = endDaytime.set('minute', day.end.day);
+      endDaytime = endDaytime.set('day', day.end.day);
     }
     if (day?.end?.hours) {
       endDaytime = endDaytime.set('hour', day.end.hours);
