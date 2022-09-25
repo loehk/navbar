@@ -1,8 +1,7 @@
-import { SetStateAction, Dispatch, useContext } from 'react';
+import { SetStateAction, Dispatch } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
-import { containerStyle, mapOptions } from './mapConfig';
+import { containerStyle, center, mapOptions } from './mapConfig';
 import styles from './GoogleBarMap.module.scss';
-import { LocationContext } from '../../../store/location-context';
 
 export type MarkerType = {
   id: string;
@@ -17,6 +16,7 @@ const GoogleBarMap = ({
   map,
   setMap,
   nearbyBars,
+  selectedBarId,
   setSelectedBarId,
 }: {
   darkmode: boolean;
@@ -26,19 +26,13 @@ const GoogleBarMap = ({
   selectedBarId: string | null;
   setSelectedBarId: Dispatch<SetStateAction<string | null>>;
 }) => {
+
   const onLoad = (map: google.maps.Map) => {
     setMap(map);
   };
 
   const onUnMount = () => {
     setMap(null);
-  };
-
-  const locationContext = useContext(LocationContext);
-
-  let center = {
-    lat: locationContext!.currentLocation.lat,
-    lng: locationContext!.currentLocation.lng,
   };
 
   return (
@@ -51,14 +45,15 @@ const GoogleBarMap = ({
         onLoad={onLoad}
         onUnmount={onUnMount}
       >
-        <Marker
-          position={center}
-        />
+        <Marker position={center} />
         {nearbyBars
           ? nearbyBars.map(bar => (
               <Marker
                 key={bar.place_id}
-                position={center}
+                position={{
+                  lat: bar.geometry?.location?.lat()!,
+                  lng: bar.geometry?.location?.lng()!,
+                }}
                 icon={{
                   url: '/icons/coctail-icon.svg',
                   // @ts-ignore

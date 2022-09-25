@@ -2,19 +2,6 @@ import mongoose, { Schema } from 'mongoose';
 
 const locationSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    latitude: {
-      type: Number,
-      required: true,
-    },
-    longitude: {
-      type: Number,
-      required: true,
-    },
-    // id from google api
     place_id: {
       type: String,
     },
@@ -33,74 +20,23 @@ const locationSchema = new mongoose.Schema(
         ref: 'Moderator',
       },
     ],
-    address: {
-      type: String,
-      required: true,
-    },
-    opening_hours: {
-      normal_days: {
-        monday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-        tuesday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-        wednesday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-        thursday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-        friday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-        saturday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-        sunday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-      },
-      holidays: {},
-    },
     happy_hours: {
-      normal_days: {
-        monday: {
-          start: { type: Date },
-          end: { type: Date },
+        periods: [
+          {
+            start: {
+              day: Number,
+              hours: Number,
+              minutes: Number,
+              time: 'string',
         },
-        tuesday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-        wednesday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-        thursday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-        friday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-        saturday: {
-          start: { type: Date },
-          end: { type: Date },
-        },
-        sunday: {
-          start: { type: Date },
-          end: { type: Date },
+            end: {
+              day: Number,
+              hours: Number,
+              minutes: Number,
+              time: 'string',
         },
       },
+        ],
     },
     ratings: [
       {

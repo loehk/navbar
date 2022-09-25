@@ -1,0 +1,10 @@
+{
+    "scripts": {
+        "dev": "concurrently --kill-others \"npm run dev --prefix client\" \"npm run dev --prefix server\""
+
+      },
+    
+  "dependencies": {
+    "concurrently": "^7.4.0"
+  }
+}
