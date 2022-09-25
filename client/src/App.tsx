@@ -6,7 +6,8 @@ import { LocationContextProvider } from './store/location-context';
 import { UserContextProvider } from './components/landing-components/authentication/UserContext';
 import LocationsPage from './pages/locations';
 import UserSettings from './components/account-components/UserSettings';
-import About from "./components/landing-components/BottomSection/About/About"
+import About from "./components/landing-components/BottomSection/About/About";
+import LoadingScreen from "../src/components/reusable-components/LoadingScreen/LoadingScreen";
 
 const libraries: LoadScriptProps['libraries'] = ['places', 'geometry'];
 
@@ -17,7 +18,7 @@ function App() {
     libraries: libraries,
   });
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <LoadingScreen />;  
 
   return (
     <div className={styles.App}>
