@@ -71,93 +71,19 @@ export default function ({
     }
   },[selectedBarId])
 
-  const getMonday=()=>{
+  const getForDay=(selectedDay:number)=>{
     if(navBarInfo){
       const periods = navBarInfo?.happy_hours?.periods;
       if(periods){
-        const day = periods.find((element: any)=>{return element.start.day ===1});
+        const day = periods.find((element: any)=>{return element.start.day ===selectedDay});
         if(day){
           return getFormattedHappyHour(day);
         }
       }
     }
     return "No happy hours"
-  }
 
-  const getTuesday=()=>{
-    if(navBarInfo){
-      const periods = navBarInfo?.happy_hours?.periods;
-      if(periods){
-        const day = periods.find((element: any)=>{return element.start.day ===2});
-        if(day){
-          return getFormattedHappyHour(day);
-        }
-      }
-    }
-    return "No happy hours"
   }
-
-  const getWednesday=()=>{
-    if(navBarInfo){
-      const periods = navBarInfo?.happy_hours?.periods;
-      if(periods){
-        const day = periods.find((element: any)=>{return element.start.day ===3});
-        if(day){
-          return getFormattedHappyHour(day);
-        }
-      }
-    }
-    return "No happy hours"
-  }
-
-  const getThursday=()=>{
-    if(navBarInfo){
-      const periods = navBarInfo?.happy_hours?.periods;
-      if(periods){
-        const day = periods.find((element: any)=>{return element.start.day ===4});
-        if(day){
-          return getFormattedHappyHour(day);
-        }      }
-    }
-    return "No happy hours"
-  }
-
-  const getFriday=()=>{
-    if(navBarInfo){
-      const periods = navBarInfo?.happy_hours?.periods;
-      if(periods){
-        const day = periods.find((element: any)=>{return element.start.day ===5});
-        if(day){
-          return getFormattedHappyHour(day);
-        }      }
-    }
-    return "No happy hours"
-  }
-
-  const getSaturday=()=>{
-    if(navBarInfo){
-      const periods = navBarInfo?.happy_hours?.periods;
-      if(periods){
-        const day = periods.find((element: any)=>{return element.start.day ===6});
-        if(day){
-          return getFormattedHappyHour(day);
-        }      }
-    }
-    return "No happy hours"
-  }
-
-  const getSunday=()=>{
-    if(navBarInfo){
-      const periods = navBarInfo?.happy_hours?.periods;
-      if(periods){
-        const day = periods.find((element: any)=>{return element.start.day ===0});
-        if(day){
-          return getFormattedHappyHour(day);
-        }      }
-    }
-    return "No happy hours"
-  }
-
   return (
     <motion.div
       className={styles.SelectedBarContainer}
@@ -194,13 +120,13 @@ export default function ({
             </ul>
             <ul className={styles.dayTime}>
             <li></li>
-              <li key={"happyHour_mon_date"}>{getMonday()}</li>
-              <li key={"happyHour_tue_date"}>{getTuesday()}</li>
-              <li key={"happyHour_wed_date"}>{getWednesday()}</li>
-              <li key={"happyHour_thur_date"}>{getThursday()}</li>
-              <li key={"happyHour_fri_date"}>{getFriday()}</li>
-              <li key={"happyHour_sat_date"}>{getSaturday()}</li>
-              <li key={"happyHour_sun_date"}>{getSunday()}</li>
+              <li key={"happyHour_mon_date"}>{getForDay(1)}</li>
+              <li key={"happyHour_tue_date"}>{getForDay(2)}</li>
+              <li key={"happyHour_wed_date"}>{getForDay(3)}</li>
+              <li key={"happyHour_thur_date"}>{getForDay(4)}</li>
+              <li key={"happyHour_fri_date"}>{getForDay(5)}</li>
+              <li key={"happyHour_sat_date"}>{getForDay(6)}</li>
+              <li key={"happyHour_sun_date"}>{getForDay(0)}</li>
             </ul>
             </div>
 
