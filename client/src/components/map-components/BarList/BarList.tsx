@@ -1,6 +1,11 @@
+import { ListItemButton } from '@mui/material';
+import { useState } from 'react';
 import styles from './BarList.module.scss';
 
-export default function BarList({ nearbyBars }: { nearbyBars: google.maps.places.PlaceResult[] }) {
+export default function BarList({ nearbyBars, onClick }: { onClick:Function, nearbyBars: google.maps.places.PlaceResult[] }) {
+
+  const [additionalBarInfo, setAdditionalBarInfo] = useState(null); 
+
   return (
     <div className={styles.BarListContainer}>
       <div className={styles.BarsNearby}>
@@ -8,7 +13,8 @@ export default function BarList({ nearbyBars }: { nearbyBars: google.maps.places
       </div>
       <ul className={styles.BarList}>
         {nearbyBars.map(bar => (
-          <li key={bar.place_id}>
+          <ListItemButton key={bar.place_id} onClick={()=>{onClick(bar)}}>
+          <li>
             <div className={styles.barImage}>
               {bar.photos?.[0] ? <img src={bar.photos[0].getUrl()} alt={bar.name} /> : null}
             </div>
@@ -33,15 +39,16 @@ export default function BarList({ nearbyBars }: { nearbyBars: google.maps.places
                 ) : null}
                 <p
                   className={
-                    styles.barOpenText + (bar.opening_hours?.open_now ? '' : ` ${styles.barClosed}`)
+                    styles.barOpenText + (bar.opening_hours?.isOpen ? '' : ` ${styles.barClosed}`)
                   }
                 >
-                  {bar.opening_hours?.open_now ? 'Open now!' : 'Closed'}
+                  {bar.opening_hours?.isOpen ? 'Open now!' : 'Closed'}
                 </p>
                 {/* <p className={styles.barDistance}></p> */}
               </div>
             </div>
           </li>
+          </ListItemButton>
         ))}
       </ul>
     </div>

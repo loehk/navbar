@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import SideBar from '../components/map-components/SideBar/SideBar';
 import TempDarkModeButton from '../components/map-components/TempDarkModeButton';
 import { center } from '../components/map-components/GoogleBarMap/mapConfig';
+import axios from 'axios';
 
 const placesRequest: google.maps.places.PlaceSearchRequest = {
   location: center,
@@ -20,6 +21,7 @@ export default function LocationsPage() {
   const [nearbyBars, setNearbyBars] = useState<google.maps.places.PlaceResult[] | null>(null);
   const [selectedBar, setSelectedBar] = useState<google.maps.places.PlaceResult | null>(null);
   const [selectedBarId, setSelectedBarId] = useState<string | null>(null);
+  const [navBarInfo, setNavBarInfo] = useState<any|null>(null)
 
   function toggleDarkMode() {
     setDarkmode(!darkmode);
@@ -37,6 +39,25 @@ export default function LocationsPage() {
     if (map) fetchNearbyBars(map);
   }, [map]);
 
+  useEffect(()=>{
+    if(map){
+      if(selectedBar)
+      map!.panTo(selectedBar!.geometry?.location!)
+    }
+
+  },[selectedBar])
+
+  useEffect(()=>{
+    if(map){
+      if(selectedBarId){
+        axios.get(`http://localhost:3000/location/getPlace/${selectedBarId}`).then((response)=>{
+          window.console.log(JSON.stringify(response.data))
+          setNavBarInfo(response.data)
+        })
+      }
+    }
+  },[selectedBarId])
+
   // if (!map) return <div>Loading...</div>;
 
   return (
@@ -44,6 +65,7 @@ export default function LocationsPage() {
       <SideBar
         map={map!}
         nearbyBars={nearbyBars}
+        setSelectedBar={setSelectedBar}
         selectedBarId={selectedBarId}
         setSelectedBarId={setSelectedBarId}
       />
