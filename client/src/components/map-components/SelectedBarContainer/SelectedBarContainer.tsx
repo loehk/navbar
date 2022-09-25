@@ -85,20 +85,21 @@ export default function ({
         <Button
           size="large"
           variant="outlined"
-          sx={{ color: '#272838' }}
+          sx={{ color: '#272838', borderColor: '#7d6b91' }}
           onClick={() => setSelectedBarId(null)}
         >
           go back
         </Button>
-       <Link to="/">
-        <Button
-          size="large"
-          variant="outlined"
-          sx={{ color: '#272838' }}
-          onClick={() => setSelectedBarId(null)}
-        >
-          search
-        </Button></Link>
+        <Link to="/">
+          <Button
+            size="large"
+            variant="outlined"
+            sx={{ color: '#272838', borderColor: '#7d6b91' }}
+            onClick={() => setSelectedBarId(null)}
+          >
+            search
+          </Button>
+        </Link>
       </div>
     </motion.div>
   );

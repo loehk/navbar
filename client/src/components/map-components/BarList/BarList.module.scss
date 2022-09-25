@@ -24,6 +24,7 @@ $top-height-mobile: 2rem;
     font-size: 1em;
     line-height: 0;
     color: $light-blue;
+    user-select: none;
   }
   @media screen and (min-width: $locations-breakpoint-1) {
     height: $top-height;
