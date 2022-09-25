@@ -81,24 +81,22 @@ export const authenticateLocationRights = (req: any, res: Response, next: NextFu
 
 export const addUserToRequest = (req: any, res: Response, next: NextFunction) => {
   const onDecode = async (error: any, decoded: { _id: any }) => {
-    if (error) {
-      return res.status(401).send('Invalid Token');
-    }
+    try{
     const sessionUser = await userModel.findById(decoded._id);
     if (sessionUser) {
       req.user = sessionUser;
     }
-    next();
+    }catch(err){}
   };
 
   const token = req.body.token || req.query.token || req.cookies['token'];
 
   if (!token) {
-    return res.status(403).send('A token is required for authentication');
-  }
+    next()
+  }else{
   try {
     jwt.verify(token, SECRET_KEY, (err: any, decoded: any) => onDecode(err, decoded));
-  } catch (err) {
-    return res.status(401).send('Invalid Token');
+    } catch (err) {}
+    next()  
   }
 };
