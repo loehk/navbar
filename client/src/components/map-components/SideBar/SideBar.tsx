@@ -9,7 +9,9 @@ export default function ({
   nearbyBars,
   selectedBarId,
   setSelectedBarId,
+  setSelectedBar
 }: {
+  setSelectedBar: Dispatch<SetStateAction<google.maps.places.PlaceResult | null>>;
   map: google.maps.Map;
   nearbyBars: google.maps.places.PlaceResult[] | null;
   selectedBarId: string | null;
@@ -17,7 +19,10 @@ export default function ({
 }) {
   return (
     <div className={styles.SideBar}>
-      {nearbyBars ? <BarList nearbyBars={nearbyBars} /> : <p>Loading bars...</p>}
+      {nearbyBars ? <BarList onClick={(bar: google.maps.places.PlaceResult)=>{
+        setSelectedBar(bar)
+        setSelectedBarId(bar.place_id!)
+        }} nearbyBars={nearbyBars} /> : <p>Loading bars...</p>}
       <AnimatePresence mode="wait">
         {selectedBarId ? (
           <SelectedBarContainer
