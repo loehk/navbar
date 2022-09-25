@@ -1,6 +1,6 @@
 import Navigation from '../landing-components/Navigation/Navigation';
 import OptionList from './OptionList';
-import styles from '../../pages/home.module.scss';
+import styles from './Settings.module.scss';
 import Container from '@mui/material/Container';
 import SettingsContainer from './SettingsContainer';
 import AdminContainer from './admin-panel-components/AdminContainer';
@@ -19,7 +19,7 @@ const UserSettings = () => {
   };
 
   return (
-    <div className={styles.homeWrapper}>
+    <div className={styles.userSettings}>
       <Navigation />
       <Container maxWidth="xl" sx={{ display: 'flex', height: '75%', marginTop: 5 }}>
         <OptionList setOption={setOption} />

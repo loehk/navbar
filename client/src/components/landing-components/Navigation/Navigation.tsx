@@ -12,14 +12,16 @@ function Navigation({}: Props) {
       <Logo />
       <div className={styles.buttonGroup}>
         <NavLink to="#about">
-          <Button
-            onClick={() => {
-              window.scrollTo({top: 550, left: 0, behavior: 'smooth' });
-            }}
-            sx={{ color: '#5d536b' }}
-          >
-            HELP
-          </Button>
+          {window.location.pathname !== '/settings' ? (
+                      <Button
+                      onClick={() => {
+                        window.scrollTo({top: 550, left: 0, behavior: 'smooth' });
+                      }}
+                      sx={{ color: '#5d536b' }}
+                    >
+                      HELP
+                    </Button>
+                  ) : null}
         </NavLink>
         <AuthButton />
       </div>
