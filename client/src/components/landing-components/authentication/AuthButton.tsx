@@ -36,7 +36,7 @@ const AuthModal = () => {
       ) : (
         <div>
           <ProfileIcon />
-          </div>
+        </div>
       )}
     </div>
   );
