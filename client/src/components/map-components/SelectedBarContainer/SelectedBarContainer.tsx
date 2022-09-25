@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import styles from './SelectedBarContainer.module.scss';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import OpeningHours from './OpeningHours/OpeningHours';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 interface OpeningHoursDay {
   start: Date;
@@ -50,7 +52,6 @@ export default function ({
       },
       (place, status) => {
         if (status === 'OK') {
-          console.log('fetched bar', place);
           setFetchedBar(place);
         }
       },
@@ -65,7 +66,6 @@ export default function ({
       exit={{ x: '100%' }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
-      <button onClick={() => setSelectedBarId(null)}>go back</button>
       {fetchedBar ? (
         <>
           {fetchedBar.photos ? (
@@ -81,6 +81,25 @@ export default function ({
       ) : (
         'Loading..'
       )}
+      <div className={styles.buttonContainer}>
+        <Button
+          size="large"
+          variant="outlined"
+          sx={{ color: '#272838' }}
+          onClick={() => setSelectedBarId(null)}
+        >
+          go back
+        </Button>
+       <Link to="/">
+        <Button
+          size="large"
+          variant="outlined"
+          sx={{ color: '#272838' }}
+          onClick={() => setSelectedBarId(null)}
+        >
+          search
+        </Button></Link>
+      </div>
     </motion.div>
   );
 }

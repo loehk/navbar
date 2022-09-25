@@ -75,6 +75,10 @@ const GoogleBarMap = ({
                 onClick={() => {
                   setSelectedBarId(bar.place_id || null);
                   // map!.setZoom(17);
+                  locationContext?.setCurrentLocation({
+                    lat: bar.geometry?.location?.lat()!,
+                    lng: bar.geometry?.location?.lng()!,
+                  });
                   map!.panTo(bar.geometry?.location!);
                 }}
               />

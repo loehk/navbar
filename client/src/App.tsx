@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter, useLocation } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import styles from './App.module.scss';
 import Home from '../src/pages/home';
 import { LoadScriptProps, useJsApiLoader } from '@react-google-maps/api';

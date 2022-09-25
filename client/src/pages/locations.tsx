@@ -84,7 +84,7 @@ export default function LocationsPage() {
         selectedBarId={selectedBarId}
         setSelectedBarId={setSelectedBarId}
       />
-      <TempDarkModeButton toggleDarkMode={toggleDarkMode} />
+      <TempDarkModeButton darkMode={darkmode} toggleDarkMode={toggleDarkMode} />
     </div>
   );
 }
