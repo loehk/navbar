@@ -2,4 +2,8 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    .buttonGroup {
+        display: flex;
+        gap: 1em;
+    }
 }

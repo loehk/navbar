@@ -5,7 +5,7 @@ type Props = {};
 
 function About({}: Props) {
   return (
-    <section className={styles.aboutWrapper}>
+    <section id="about" className={styles.aboutWrapper}>
       <h5>HAPPY HOURS FOR HAPPY TIMES</h5>
       <h3>See what's happening near you! 🍹</h3>
       <p>

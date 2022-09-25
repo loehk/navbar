@@ -8,7 +8,6 @@
   background-color: $purple;
   background-blend-mode: darken;
   font-family: 'FoundersGrotesk-Bold';
-  height: 10rem;
   width: 100%;
   padding: 1rem;
   position: relative;
@@ -20,12 +19,13 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin: 2rem;
     h2 {
       font-size: 1.5em;
     }
     p {
       width: 33%;
-      font-size: 0.9em;
+      font-size: 0.8em;
     }
   }
 }

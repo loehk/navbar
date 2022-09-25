@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import AuthContainer from './AuthContainer';
@@ -20,7 +20,7 @@ const AuthModal = () => {
     <div>
       {userContext?.user === null ? (
       <div>
-        <Button onClick={handleOpen}>Sign in</Button>
+        <Button variant="outlined" sx={{borderColor: "#7d6b91", color: "#5d536b"}} onClick={handleOpen}>Sign in</Button>
         <Modal open={open} onClose={handleClose} 
           closeAfterTransition
           BackdropComponent={Backdrop}
