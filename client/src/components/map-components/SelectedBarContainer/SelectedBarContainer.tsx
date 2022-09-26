@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import styles from './SelectedBarContainer.module.scss';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import OpeningHours from './OpeningHours/OpeningHours';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import dayjs from 'dayjs';
 
@@ -53,7 +55,6 @@ export default function ({
       },
       (place, status) => {
         if (status === 'OK') {
-          console.log('fetched bar', place);
           setFetchedBar(place);
         }
       },
@@ -139,6 +140,26 @@ export default function ({
       ) : (
         'Loading..'
       )}
+      <div className={styles.buttonContainer}>
+        <Button
+          size="large"
+          variant="outlined"
+          sx={{ color: '#272838', borderColor: '#7d6b91' }}
+          onClick={() => setSelectedBarId(null)}
+        >
+          go back
+        </Button>
+        <Link to="/">
+          <Button
+            size="large"
+            variant="outlined"
+            sx={{ color: '#272838', borderColor: '#7d6b91' }}
+            onClick={() => setSelectedBarId(null)}
+          >
+            search
+          </Button>
+        </Link>
+      </div>
     </motion.div>
   );
 }

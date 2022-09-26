@@ -50,13 +50,19 @@
 
 .OpeningHours {
   display: flex;
+  justify-content: space-between;
+  margin-inline: 3rem;
   font-size: 0.8em;
   gap: 1rem;
+  margin-bottom: 2rem;
   .dayName {
     color: $dark-purple;
+    font-weight: bold;
+    font-family: 'FoundersGrotesk-Medium';
   }
   .dayTime {
-    color: $lilac;
+    color: $purple;
+    text-align: left;
     .closed {
       color: #f73911;
     }

@@ -97,9 +97,7 @@ export const getLocationByPlaceId = async (req: any, res:Response)=>{
       const periods = _doc.happy_hours.periods
       const today = periods.find((period: { start: { day: number, minutes: number, hours:number}, end: { day: number, minutes: number, hours:number}; })=>{return period.start.day === dayjs().day()})
       if(today){
-        const start = dayjs().day(today.start.day).hour(today.start.hours).minute(today.start.minutes)
-        const end = dayjs().day(today.end.day).hour(today.end.hours).minute(today.end.minutes)
-        isHappyHour = dayjs().isBefore(end) && dayjs().isAfter(start)
+        isHappyHour = getIsHappyHour(today, isHappyHour);
       }
       const {createdAt, updatedAt, __v, ...locationWithModerators} = _doc;
       const locationData = removeModerators(locationWithModerators)
@@ -127,10 +125,8 @@ export const getLocations = async (req: any, res: Response) => {
         const periods = location.happy_hours.periods
         const today = periods.find((period: { start: { day: number, minutes: number, hours:number}, end: { day: number, minutes: number, hours:number}; })=>{return period.start.day === dayjs().day()})
         if(today){
-          const start = dayjs().day(today.start.day).hour(today.start.hours).minute(today.start.minutes)
-          const end = dayjs().day(today.end.day).hour(today.end.hours).minute(today.end.minutes)
-          isHappyHour = dayjs().isBefore(end) && dayjs().isAfter(start)
-    }
+          isHappyHour = getIsHappyHour(today, isHappyHour);
+        }
         return {isHappyHour:isHappyHour, ...location}
       
        })
@@ -140,3 +136,34 @@ export const getLocations = async (req: any, res: Response) => {
     console.log(err);
   }
 };
+function getIsHappyHour(today: any, isHappyHour: boolean) {
+  let start = dayjs().set('second', 0);
+  let end = dayjs().set('second', 0);
+
+  if (today?.start?.day) {
+    start = start.set('day', today.start.day);
+  }
+  if (today?.start?.hours) {
+    start = start.set('hour', today.start.hours);
+  }
+  if (today?.start?.minutes) {
+    start = start.set('minute', today.start.minutes);
+  } else {
+    start = start.set('minute', 0);
+  }
+
+  if (today?.end?.day) {
+    end = end.set('day', today.end.day);
+  }
+  if (today?.end?.hours) {
+    end = end.set('hour', today.end.hours);
+  }
+  if (today?.end?.minutes) {
+    end = end.set('minute', today.end.minutes);
+  } else {
+    end = end.set('minute', 0);
+  }
+  isHappyHour = dayjs().isBefore(end) && dayjs().isAfter(start);
+  return isHappyHour;
+}
+
