@@ -3,6 +3,7 @@ import TopSection from '../components/landing-components/TopSection/TopSection';
 import BottomSection from '../components/landing-components/BottomSection/BottomSection';
 import Search from '../components/landing-components/Search/Search';
 import styles from './home.module.scss';
+import LoadingScreen from '../components/reusable-components/LoadingScreen/LoadingScreen';
 
 type Props = {};
 

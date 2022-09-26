@@ -14,6 +14,7 @@ $top-height-mobile: 2rem;
 .BarsNearby {
   height: $top-height-mobile;
   background-color: $purple;
+  font-family: 'FoundersGrotesk-Bold';
   width: 100%;
   display: flex;
   align-items: center;
@@ -23,6 +24,7 @@ $top-height-mobile: 2rem;
     font-size: 1em;
     line-height: 0;
     color: $light-blue;
+    user-select: none;
   }
   @media screen and (min-width: $locations-breakpoint-1) {
     height: $top-height;
@@ -62,11 +64,28 @@ $top-height-mobile: 2rem;
     .barImage {
       width: 100px;
       height: 100px;
-      background-color: $lilac;
       img {
         width: 100px;
         height: 100px;
         object-fit: cover;
+        transition: transform 0.2s;
+        border-radius: 5px;
+        &:hover:not(.defaultImage img) {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .defaultImage {
+      background-color: rgb(209, 205, 205);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 50px !important;
+        height: 50px !important;
       }
     }
     .barInfo {
@@ -100,9 +119,13 @@ $top-height-mobile: 2rem;
           padding-top: 2px;
           font-size: 0.75em;
           color: $lilac;
+          font-family: 'FoundersGrotesk-Bold';
+
         }
         .barClosed {
           color: #f73911;
+          font-family: 'FoundersGrotesk-Bold';
+
         }
         .barDistance {
           margin-left: auto;

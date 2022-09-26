@@ -1,7 +1,8 @@
-import { SetStateAction, Dispatch } from 'react';
+import { SetStateAction, Dispatch, useContext } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
-import { containerStyle, center, mapOptions } from './mapConfig';
+import { containerStyle, mapOptions, center } from './mapConfig';
 import styles from './GoogleBarMap.module.scss';
+import { LocationContext } from '../../../store/location-context';
 
 export type MarkerType = {
   id: string;
@@ -26,7 +27,6 @@ const GoogleBarMap = ({
   selectedBarId: string | null;
   setSelectedBarId: Dispatch<SetStateAction<string | null>>;
 }) => {
-
   const onLoad = (map: google.maps.Map) => {
     setMap(map);
   };
@@ -35,17 +35,27 @@ const GoogleBarMap = ({
     setMap(null);
   };
 
+  const locationContext = useContext(LocationContext);
+
   return (
     <div className={styles.googleBarMapContainer}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         options={mapOptions(darkmode)}
-        center={center}
+        center={{
+          lat: locationContext!.currentLocation.lat,
+          lng: locationContext!.currentLocation.lng,
+        }}
         zoom={15}
         onLoad={onLoad}
         onUnmount={onUnMount}
       >
-        <Marker position={center} />
+        <Marker
+          position={{
+            lat: locationContext!.currentLocation.lat,
+            lng: locationContext!.currentLocation.lng,
+          }}
+        />
         {nearbyBars
           ? nearbyBars.map(bar => (
               <Marker
@@ -65,6 +75,10 @@ const GoogleBarMap = ({
                 onClick={() => {
                   setSelectedBarId(bar.place_id || null);
                   // map!.setZoom(17);
+                  locationContext?.setCurrentLocation({
+                    lat: bar.geometry?.location?.lat()!,
+                    lng: bar.geometry?.location?.lng()!,
+                  });
                   map!.panTo(bar.geometry?.location!);
                 }}
               />

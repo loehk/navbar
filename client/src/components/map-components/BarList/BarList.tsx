@@ -2,9 +2,20 @@ import { ListItemButton } from '@mui/material';
 import { useState } from 'react';
 import styles from './BarList.module.scss';
 
-export default function BarList({ nearbyBars, onClick }: { onClick:Function, nearbyBars: google.maps.places.PlaceResult[] }) {
-
+export default function BarList({
+  nearbyBars,
+  onClick,
+}: {
+  onClick: Function;
+  nearbyBars: google.maps.places.PlaceResult[];
+}) {
   const [additionalBarInfo, setAdditionalBarInfo] = useState(null); 
+
+  const defaultImage = (
+    <div className={styles.defaultImage}>
+      <img src="./public/icons/coctail-icon.svg" alt="Icon with a drink" />
+    </div>
+  );
 
   return (
     <div className={styles.BarListContainer}>
@@ -13,10 +24,19 @@ export default function BarList({ nearbyBars, onClick }: { onClick:Function, nea
       </div>
       <ul className={styles.BarList}>
         {nearbyBars.map(bar => (
-          <ListItemButton key={bar.place_id} onClick={()=>{onClick(bar)}}>
+          <ListItemButton
+            key={bar.place_id}
+            onClick={() => {
+              onClick(bar);
+            }}
+          >
           <li>
             <div className={styles.barImage}>
-              {bar.photos?.[0] ? <img src={bar.photos[0].getUrl()} alt={bar.name} /> : null}
+                {bar.photos?.[0] ? (
+                  <img src={bar.photos[0].getUrl()} alt={bar.name} />
+                ) : (
+                  defaultImage
+                )}
             </div>
             <div className={styles.barInfo}>
               <h4 className={styles.barName}>{bar.name}</h4>
