@@ -40,6 +40,11 @@
     margin-bottom: 12px;
   }
 
+  .buttonContainer {
+    display: flex;
+    justify-content: space-around;
+  }
+
   .infoContainer {
     padding-inline: 0.5rem;
     .barName {

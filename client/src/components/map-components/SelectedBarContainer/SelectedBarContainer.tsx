@@ -93,7 +93,6 @@ export default function ({
       exit={{ x: '100%' }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
-      <button onClick={() => setSelectedBarId(null)}>go back</button>
       {fetchedBar ? (
         <>
           {fetchedBar.photos ? (
